@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅភាគ១</title>
+    <link rel="stylesheet" href="វប្បធម៌ទូទៅ1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;700&family=Khmer&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+    font-family: 'Kantumruy Pro', 'Khmer', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.quiz-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 750px;
+    width: 100%;
+}
+
+h1 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1.6rem;
+}
+
+h2 {
+    color: #5f6368;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+h3{
+    color: #5f6368;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.timer-box {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+}
+
+.timer-box.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.section-title {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-left: 5px solid #1a73e8;
+}
+
+.question-block {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.question-title {
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.options label {
+    display: block;
+    padding: 12px;
+    background-color: #f8f9fa;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.options label:hover {
+    background-color: #e8f0fe;
+}
+
+.options input {
+    margin-right: 10px;
+}
+
+.options label.correct {
+    background-color: #d4edda !important;
+    border-color: #28a745;
+    color: #155724;
+    font-weight: bold;
+}
+
+.options label.incorrect {
+    background-color: #f8d7da !important;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: none;
+    background-color: #e2e3e5;
+    color: #383d41;
+    line-height: 1.6;
+}
+
+.explanation {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #edf4fe;
+    border-left: 4px solid #1a73e8;
+    border-radius: 4px;
+    color: #202124;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+</style>
+<body>
+
+<div class="quiz-container">
+    <h1>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅ</h1>
+    <h2>កម្រងសំណួរជ្រើសរើស (១១១ សំណួរ) សម្រាប់ប្រឡងគ្រូបង្រៀនភាគ១</h2>
+    <h3>រៀបរៀងដោយ៖ ហួច សេងហុង</h3>
+    
+    <div id="timer" class="timer-box">ពេលវេលានៅសល់៖ 45:00</div>
+    
+    <form id="quizForm">
+        
+        
+        <div class="section-title">ផ្នែកទី ១៖ ចំណេះដឹងមូលដ្ឋាន និងពុទ្ធសាសនា</div>
+        <div class="question-block">
+            <div class="question-title">១. ចូរជ្រើសរើសជួរដែលរាប់ឈ្មោះខែចន្ទគតិខ្មែរបានត្រឹមត្រូវ និងតាមលំដាប់លំដោយ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="A"> មិគសិរ បុស្ស មាឃ ផល្គុន ជេស្ឋ ចេត្រ ពិសាខ អាសាឍ ស្រាពណ៍ ភទ្របទ អស្សុជ កត្តិក</label>
+                <label><input type="radio" name="q1" value="B"> មិគសិរ បុស្ស មាឃ ផល្គុន ចេត្រ ពិសាខ ជេស្ឋ អាសាឍ ស្រាពណ៍ ភទ្របទ អស្សុជ កត្តិក</label>
+                <label><input type="radio" name="q1" value="C"> ចេត្រ ពិសាខ ជេស្ឋ អាសាឍ មិគសិរ បុស្ស មាឃ ផល្គុន ស្រាពណ៍ ភទ្របទ អស្សុជ កត្តិក</label>
+            </div>
+            <div class="explanation" id="exp-q1"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២. តើអគតិមានប៉ុន្មានប្រការ? អ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="A"> មាន ៣ ប្រការគឺ៖ ឆន្ទាគតិ ទោសាគតិ មោហាគតិ</label>
+                <label><input type="radio" name="q2" value="B"> មាន ៤ ប្រការគឺ៖ ឆន្ទាគតិ ទោសាគតិ មោហាគតិ ភយាគតិ</label>
+                <label><input type="radio" name="q2" value="C"> មាន ៥ ប្រការគឺ៖ ឆន្ទាគតិ ទោសាគតិ មោហាគតិ ភយាគតិ លោភាគតិ</label>
+            </div>
+            <div class="explanation" id="exp-q2"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៣. តើគេចែកប្រភេទនៃមនុស្សជាប៉ុន្មានប្រភេទតាមទ្រឹស្តីព្រះពុទ្ធសាសនា?</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> ៥ ប្រភេទគឺ៖ មនុស្សនេរយិកោ, មនុស្សបេតោ, មនុស្សតិរច្ឆានោ, មនុស្សមនុស្សោ, មនុស្សទេវោ</label>
+                <label><input type="radio" name="q3" value="B"> ៤ ប្រភេទគឺ៖ មនុស្សនេរយិកោ, មនុស្សបេតោ, មនុស្សតិរច្ឆានោ, មនុស្សមនុស្សោ</label>
+                <label><input type="radio" name="q3" value="C"> ៣ ប្រភេទគឺ៖ មនុស្សអាក្រក់, មនុស្សកណ្តាល, មនុស្សល្អ</label>
+            </div>
+            <div class="explanation" id="exp-q3"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៤. នៅក្នុងទង់ព្រះពុទ្ធសាសនា តើ "រស្មីពណ៌ខៀវ" មានអត្ថន័យតំណាងឱ្យអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> កាលព្រះអង្គបានអារសាច់ខ្លួនឱ្យជាងមាស ដើម្បីធ្វើជាមាសបិទព្រះពុទ្ធរូប</label>
+                <label><input type="radio" name="q4" value="B"> ពណ៌ខៀវ តំណាងឱ្យ ព្រះនិលកេសា (ព្រះកេសពណ៌ខៀវ) ឬរស្មីពណ៌ខៀវ ដែលបញ្ចេញពីព្រះកាយព្រះសម្មាសម្ពុទ្ធ។</label>
+                <label><input type="radio" name="q4" value="C"> តំណាងពេលព្រះអង្គទ្រង់យកកាំបិតមកពុះទ្រូង លូកយកបេះដូងមកផ្សំថ្នាំព្យាបាលមាតា</label>
+            </div>
+            <div class="explanation" id="exp-q4"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៥. ក្រោយពីចូលជាសមាជិកអាស៊ាន ផលប្រយោជន៍ចម្បងផ្នែកនយោបាយ និងសន្តិសុខរបស់កម្ពុជាគឺ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> លែងព្រួយបារម្ភចំពោះការគំរាមកំហែងសន្តិសុខ លែងនៅឯកោ និងដោះស្រាយបញ្ហាដោយសន្តិវិធី</label>
+                <label><input type="radio" name="q5" value="B"> ទទួលបានការលុបបំបាត់ទិដ្ឋាការឆ្លងដែន និងទទួលបានប្រាក់កម្ចីការប្រាក់ទាប</label>
+                <label><input type="radio" name="q5" value="C"> ទទួលបានអាហារូបករណ៍ទៅបណ្តុះបណ្តាលនៅបរទេសសម្រាប់និស្សិតគ្រប់រូប</label>
+            </div>
+            <div class="explanation" id="exp-q5"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ២៖ ធម៌អហិង្សា សិទ្ធិ និងសិល្បៈចម្លាក់បុរាណ</div>
+        <div class="question-block">
+            <div class="question-title">៦. តើធម៌អហិង្សាមានន័យដូចម្តេច?</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> ជាធម៌ដែលបង្រៀនឱ្យមនុស្សចេះតតាំងការវាយប្រហារដើម្បីការពារខ្លួន</label>
+                <label><input type="radio" name="q6" value="B"> ជាធម៌ទ្រទ្រង់មនុស្សមិនឱ្យប្រព្រឹត្តអំពើហិង្សា មិនបៀតបៀន ឬធ្វើឱ្យអ្នកដទៃឈឺចាប់កាយនិងចិត្ត</label>
+                <label><input type="radio" name="q6" value="C"> ជាធម៌ដែលតម្រូវឱ្យមនុស្សសន្តោសប្រណីតែចំពោះសាច់ញាតិរបស់ខ្លួនប៉ុណ្ណោះ</label>
+            </div>
+            <div class="explanation" id="exp-q6"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៧. តើ "សិទ្ធិនយោបាយ" សំដៅទៅលើអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> សំដៅលើសេរីភាពក្នុងការប្រកបអាជីវកម្ម និងការរកស៊ីបង្កើតទ្រព្យសម្បត្តិ</label>
+                <label><input type="radio" name="q7" value="B"> សំដៅលើការចូលរួមក្នុងឆាកនយោបាយ កិច្ចការសង្គម និងការរួមកំណត់ជោគវាសនាប្រទេសជាតិ</label>
+                <label><input type="radio" name="q7" value="C"> សំដៅលើសិទ្ធិទទួលបានការអប់រំ និងការថែទាំសុខភាពពីសំណាក់រដ្ឋ</label>
+            </div>
+            <div class="explanation" id="exp-q7"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៨. តើចម្លាក់បុរាណខ្មែរត្រូវបានចែកចេញជាប៉ុន្មានប្រភេទ?</div>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> ២ ប្រភេទគឺ៖ ចម្លាក់នៅលើជញ្ជាំង និងចម្លាក់ដាច់ពីជញ្ជាំង</label>
+                <label><input type="radio" name="q8" value="B"> ៣ ប្រភេទគឺ៖ ចម្លាក់លិប (រាក់), ចម្លាក់លៀន, និងចម្លាក់លោត (ដាច់ពីជញ្ជាំង)</label>
+                <label><input type="radio" name="q8" value="C"> ៤ ប្រភេទគឺ៖ ចម្លាក់ដីដុត, ចម្លាក់ឈើ, ចម្លាក់ថ្មភក់, និងចម្លាក់សំរិទ្ធ</label>
+            </div>
+            <div class="explanation" id="exp-q8"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៩. ហេតុអ្វីបានជាប្រាសាទអង្គរវត្តខុសពីប្រាសាទដទៃ ដោយសង់បែរមុខទៅទិសខាងលិច?</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> ព្រោះទិសខាងលិចជិតស្ទឹងងាយស្រួលធ្វើដំណើរតាមទូក</label>
+                <label><input type="radio" name="q9" value="B"> ប្រាសាទអង្គរវត្តបែរមុខទៅទិសខាងលិច ព្រោះគេចាត់ទុកថាជាប្រាសាទបូជាព្រះវិស្ណុ ដែលទាក់ទងនឹងទិសខាងលិច
+                ហើយអ្នកស្រាវជ្រាវជាច្រើនក៏យល់ថា វាជាប្រាសាទផ្នូររបស់ព្រះបាទសូរ្យវរ្ម័នទី២។</label>
+                <label><input type="radio" name="q9" value="C"> ព្រោះជាទំនៀមទម្លាប់សង់ប្រាសាទថ្មីត្រូវតែបែរទៅទិសផ្ទុយពីប្រាសាទចាស់ជានិច្ច</label>
+            </div>
+            <div class="explanation" id="exp-q9"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១០. ដើម្បីរស់នៅដោយសេចក្តីថ្លៃថ្នូរ និងឱ្យសង្គមទទួលស្គាល់ មនុស្សគ្រប់រូបត្រូវប្រតិបត្តិដូចម្តេច?</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> គោរពសិទ្ធិគ្នា ទទួលខុសត្រូវរាល់ទង្វើខ្លួន ប្រកាន់ខ្ជាប់ច្បាប់ និងវៀរចាកអបាយមុខនិងគ្រឿងញៀន</label>
+                <label><input type="radio" name="q10" value="B"> ត្រូវព្យាយាមរកប្រាក់ឱ្យបានច្រើនតាមគ្រប់វិធីដើម្បីជួយគ្រួសារ និងសង្គម</label>
+                <label><input type="radio" name="q10" value="C"> ប្រើប្រាស់អំណាច និងតួនាទីរបស់ខ្លួនដើម្បីការពារផលប្រយោជន៍បក្សពួក</label>
+            </div>
+            <div class="explanation" id="exp-q10"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ៣៖ វប្បធម៌ទូទៅ ៣</div>
+        <div class="question-block">
+            <div class="question-title">១១. អំពើហិង្សាសំដៅយកការរំលោភបំពាន ឬបង្ខិតបង្ខំលើផ្នែកណាខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="A"> តែផ្លូវកាយ និងផ្លូវសេដ្ឋកិច្ចប៉ុណ្ណោះ</label>
+                <label><input type="radio" name="q11" value="B"> ផ្លូវកាយ ផ្លូវចិត្ត ផ្លូវភេទ និងផ្លូវសេដ្ឋកិច្ច រួមទាំងការប្រមាថ និងការដាក់ឱ្យនៅឯកោ</label>
+                <label><input type="radio" name="q11" value="C"> តែការវាយតប់គ្នានៅក្នុងគ្រួសារតែមួយមុខគត់</label>
+            </div>
+            <div class="explanation" id="exp-q11"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១២. តើមូលហេតុចម្បងអ្វីខ្លះ ដែលនាំឱ្យព្រះបាទពញាយ៉ាតចាកចោលក្រុងអង្គរ?</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="A"> កត្តាប្រជាជនចុះខ្សោយ, សេដ្ឋកិច្ចនិងប្រព័ន្ធធារាសាស្ត្រត្រូវបំផ្លាញ, និងភូមិសាស្ត្រនៅជិតទ័ពសៀមពេក</label>
+                <label><input type="radio" name="q12" value="B"> មកពីតំបន់អង្គរមានអាកាសធាតុក្តៅខ្លាំង និងកើតមានជំងឺរាតត្បាតដល់ប្រជាជន</label>
+                <label><input type="radio" name="q12" value="C"> ព្រោះចង់ស្វែងរកតំបន់ថ្មីដែលមានដីមានជីជាតិជាងមុនសម្រាប់ធ្វើកសិកម្ម</label>
+            </div>
+            <div class="explanation" id="exp-q12"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១៣. តើកម្ពុជាបានចូលជាសមាជិកពេញសិទ្ធិនៃសមាគមអាស៊ាន (ASEAN) នៅថ្ងៃ ខែ ឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="A"> ថ្ងៃទី ២៩ ធ្នូ ឆ្នាំ ១៩៩៨</label>
+                <label><input type="radio" name="q13" value="B"> ថ្ងៃទី ៣០ មេសា ឆ្នាំ ១៩៩៩</label>
+                <label><input type="radio" name="q13" value="C"> ថ្ងៃទី ០៧ សីហា ឆ្នាំ ១៩៦៧</label>
+            </div>
+            <div class="explanation" id="exp-q13"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១៤. នៅក្នុងទង់អាស៊ាន តើ "ដើមស្រូវទាំង១០" ដែលចងផ្ដុំគ្នាមានអត្ថន័យដូចម្ដេច?</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="A"> តំណាងឱ្យប្រទេសទាំង១០នៅអាស៊ីអាគ្នេយ៍ ប្រកបដោយមិត្តភាព និងសាមគ្គីភាពរួមគ្នា</label>
+                <label><input type="radio" name="q14" value="B"> តំណាងឱ្យកសិកម្មស្រូវអង្ករដែលជាប្រភពសេដ្ឋកិច្ចតែមួយគត់របស់តំបន់</label>
+                <label><input type="radio" name="q14" value="C"> តំណាងឱ្យស្ថេរភាពនយោបាយ និងការមិនជ្រៀតជ្រែកកិច្ចការផ្ទៃក្នុង</label>
+            </div>
+            <div class="explanation" id="exp-q14"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ៤៖ វប្បធម៌ទូទៅ ៤</div>
+        <div class="question-block">
+            <div class="question-title">១៥. ហេតុអ្វីបានជាគេចាត់ទុកវិស័យទេសចរណ៍ថាជា "ឧស្សាហកម្មគ្មានផ្សែង"?</div>
+            <div class="options">
+                <label><input type="radio" name="q15" value="A"> ព្រោះវាជាវិស័យមិនប្រើប្រាស់ម៉ាស៊ីន ឬរោងចក្រដែលបញ្ចេញផ្សែងពុល</label>
+                <label><input type="radio" name="q15" value="B"> ព្រោះវាបង្កើតការងារច្រើនសន្ធឹកសន្ធាប់ដល់ប្រជាជន (សណ្ឋាគារ ដឹកជញ្ជូន ភោជនីយដ្ឋាន សិប្បកម្ម) ដូចវិស័យឧស្សាហកម្មដែរ</label>
+                <label><input type="radio" name="q15" value="C"> ព្រោះវាជាវិស័យដែលផ្តល់ចំណូលបានលឿនជាងវិស័យកសិកម្ម</label>
+            </div>
+            <div class="explanation" id="exp-q15"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១៦. តើសិល្បៈខ្មែរត្រូវបានបែងចែកជាប៉ុន្មានទម្រង់ចម្បងៗ?</div>
+            <div class="options">
+                <label><input type="radio" name="q16" value="A"> ៥ ទម្រង់</label>
+                <label><input type="radio" name="q16" value="B"> ៧ ទម្រង់ (ស្ថាបត្យកម្ម, ចម្លាក់, គំនូរ, តន្ត្រី, របាំ, អក្សរសិល្ប៍, ភាពយន្ត)</label>
+                <label><input type="radio" name="q16" value="C"> ៩ ទម្រង់</label>
+            </div>
+            <div class="explanation" id="exp-q16"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១៧. យោងតាមច្បាប់សញ្ជាតិ តើជនបរទេសលក្ខខណ្ឌទូទៅត្រូវស្នាក់នៅជាប់ក្នុងប្រទេសកម្ពុជាចំនួនប៉ុន្មានឆ្នាំ ទើបអាចដាក់ពាក្យសុំសញ្ជាតិខ្មែរបាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="A"> ចំនួន ៣ ឆ្នាំ</label>
+                <label><input type="radio" name="q17" value="B"> ចំនួន ៥ ឆ្នាំ</label>
+                <label><input type="radio" name="q17" value="C"> ចំនួន ៧ ឆ្នាំ (គិតចាប់ពីថ្ងៃទទួលបានប័ណ្ណស្នាក់នៅស្របច្បាប់)</label>
+            </div>
+            <div class="explanation" id="exp-q17"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ៥៖ វប្បធម៌ទូទៅ ៥</div>
+        <div class="question-block">
+            <div class="question-title">១៨. តើអ្វីទៅជាសេរីភាពពិតប្រាកដនៅក្នុងសង្គម?</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="A"> ជាអំណាចដែលអាចធ្វើអ្វីៗបានទាំងអស់តាមអំពើចិត្ត ដោយគ្មានការរារាំង</label>
+                <label><input type="radio" name="q18" value="B"> ជាអំណាចដែលអាចធ្វើអ្វីបានតាមចិត្តប្រាថ្នា ប៉ុន្តែត្រូវស្ថិតនៅក្រោមរង្វង់នៃច្បាប់</label>
+                <label><input type="radio" name="q18" value="C"> ជាសិទ្ធិពិសេសរបស់ពលរដ្ឋដែលមានឋានៈខ្ពង់ខ្ពស់ក្នុងសង្គម</label>
+            </div>
+            <div class="explanation" id="exp-q18"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១៩. ព្រះពុទ្ធទ្រង់ហាមប្រាមដាច់ខាតនូវ "ជំនួញខុសធម៌ ៥ ប្រការ" (មិច្ឆាពាណិជ្ជា)។ តើជំនួញទាំងនោះមានអ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q19" value="A"> ជំនួញសាស្ត្រាវុធ, ជំនួញមនុស្ស, ជំនួញសត្វសម្រាប់ពិឃាត, ជំនួញទឹកស្រវឹង, ជំនួញថ្នាំពុល</label>
+                <label><input type="radio" name="q19" value="B"> ជំនួញល្បែងស៊ីសង, ជំនួញដីធ្លីខុសច្បាប់, ជំនួញមាសក្លែងក្លាយ, ជំនួញវត្ថុបុរាណ, ជំនួញឈើប្រណីត</label>
+                <label><input type="radio" name="q19" value="C"> ជំនួញអាហារហួសដេឡេ, ជំនួញឱសថក្លែងក្លាយ, ជំនួញសត្វព្រៃ, ជំនួញបារី, ជំនួញកាស៊ីណូ</label>
+            </div>
+            <div class="explanation" id="exp-q19"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២០. តើសីលធម៌ត្រូវបានបែងចែកជាប៉ុន្មានយ៉ាង? អ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q20" value="A"> ៣ យ៉ាងគឺ៖ សីលធម៌បុគ្គល, សីលធម៌គ្រួសារ, សីលធម៌សង្គម</label>
+                <label><input type="radio" name="q20" value="B"> ៥ យ៉ាងគឺ៖ សីលធម៌ផ្ទាល់ខ្លួន, សីលធម៌ក្នុងគ្រួសារ, សីលធម៌ក្នុងសង្គម, សីលធម៌ពិភពលោក, សីលធម៌វិជ្ជាជីវៈ</label>
+                <label><input type="radio" name="q20" value="C"> ៤ យ៉ាងគឺ៖ សីលធម៌កាយ, សីលធម៌វាចា, សីលធម៌ចិត្ត, សីលធម៌វិជ្ជាជីវៈ</label>
+            </div>
+            <div class="explanation" id="exp-q20"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ៦៖ វប្បធម៌ទូទៅ ៦ (ពិធីបំបួសនាគ, ទិវាជាតិ និងច្បាប់អាពាហ៍ពិពាហ៍)</div>
+
+        <div class="question-block">
+            <div class="question-title">២១. នៅក្នុងពិធីបំបួសនាគ តើពាក្យថា "នាគ" ក្នុងន័យពុទ្ធសាសនាសំដៅលើបុគ្គលបែបណា? ហើយការរៀបចំដង្ហែមានលក្ខណៈដូចម្តេច?</div>
+            <div class="options">
+                <label><input type="radio" name="q21" value="A"> សំដៅលើសត្វមានឫទ្ធិបារមី ហើយការដង្ហែត្រូវធ្វើឡើងនៅពេលយប់ដោយស្ងប់ស្ងាត់</label>
+                <label><input type="radio" name="q21" value="B"> សំដៅលើកុលបុត្រដែលមានសេចក្តីបរិសុទ្ធ អៀនខ្មាសខ្លាចបាប មានចិត្តជ្រះថ្លាសុំសាងផ្នួស ដង្ហែព័ទ្ធជុំវិញព្រះវិហារ ៣ ជុំ</label>
+                <label><input type="radio" name="q21" value="C"> សំដៅលើមនុស្សចាស់ជរាដែលចង់ទៅរស់នៅក្នុងវត្តដើម្បីសន្សំកុសលបុណ្យចុងក្រោយ</label>
+            </div>
+            <div class="explanation" id="exp-q21"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២២. នៅថ្ងៃទី១១ ខែមីនា ឆ្នាំ២០១៩ ក្រសួងអប់រំ យុវជន និងកីឡា បានប្រារព្ធទិវាអ្វី? ក្រោមប្រធានបទដូចម្តេច?</div>
+            <div class="options">
+                <label><input type="radio" name="q22" value="A"> ទិវាជាតិអំណាន ក្រោមប្រធានបទ "ការអានបណ្តុះវប្បធម៌ការសិក្សាពេញមួយជីវិត"</label>
+                <label><input type="radio" name="q22" value="B"> ទិវាវប្បធម៌ជាតិ ក្រោមប្រធានបទ "យុវជននិងការអភិរក្សកេរមរតកដូនតា"</label>
+                <label><input type="radio" name="q22" value="C"> ទិវាកុមារអន្តរជាតិ ក្រោមប្រធានបទ "សៀវភៅល្អសម្រាប់អនាគតកុមារគ្រប់រូប"</label>
+            </div>
+            <div class="explanation" id="exp-q22"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៣. យោងតាមច្បាប់គ្រួសារ តើជម្រើសណាមួយជា "លក្ខខណ្ឌហាមឃាត់" មិនអាចរៀបអាពាហ៍ពិពាហ៍ស្របច្បាប់បាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q23" value="A"> បុគ្គលមានសញ្ជាតិខុសគ្នា ឬមិនចេះនិយាយភាសាខ្មែរ</label>
+                <label><input type="radio" name="q23" value="B"> ជនបរទេសដែលមិនទាន់បានរស់នៅប្រទេសកម្ពុជាគ្រប់ ៧ ឆ្នាំ</label>
+                <label><input type="radio" name="q23" value="C"> ភេទដូចគ្នា, ជនវិកលចរិត, ជាប់ចំណងញាតិពន្ធលោហិតខ្សែផ្ទាល់, មានចំណងអាពាហ៍ពិពាហ៍មុនមិនទាន់រលាយ</label>
+            </div>
+            <div class="explanation" id="exp-q23"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៤. តើការសេពសុរា និងជក់បារី ផ្តល់ផលអាក្រក់ចម្បងអ្វីខ្លះ ដល់អ្នកប្រព្រឹត្ត គ្រួសារ និងសង្គម?</div>
+            <div class="options">
+                <label><input type="radio" name="q24" value="A"> បំផ្លាញសុខភាពរាងកាយ បង្កគ្រោះថ្នាក់ចរាចរណ៍ អំពើហិង្សាក្នុងគ្រួសារ ខាតបង់ប្រាក់កាស និងធ្វើឱ្យសង្គមអនាធិបតេយ្យ</label>
+                <label><input type="radio" name="q24" value="B"> ធ្វើឱ្យមនុស្សបាត់បង់ការចងចាំត្រឹមរយៈពេលខ្លីប៉ុណ្ណោះ មិនប៉ះពាល់ដល់សេដ្ឋកិច្ចគ្រួសារឡើយ</label>
+                <label><input type="radio" name="q24" value="C"> ប៉ះពាល់តែទៅលើកិត្តិយសផ្ទាល់ខ្លួន តែជួយបង្កើនចំណូលពន្ធគយសម្រាប់អភិវឌ្ឍសង្គមជាតិ</label>
+            </div>
+            <div class="explanation" id="exp-q24"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៥. ដើម្បីឱ្យមាន "សាមគ្គីភាពរឹងមាំ" នៅក្នុងសង្គម យោងតាមទ្រឹស្តីវប្បធម៌ទូទៅ តើគេត្រូវប្រកាន់យកវិធីចម្បងៗអ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q25" value="A"> ត្រូវមានអំណាច និងទ្រព្យសម្បត្តិស្មើៗគ្នា ដើម្បីកុំឱ្យមានការច្រណែនគ្នាកើតឡើង</label>
+                <label><input type="radio" name="q25" value="B"> ការតស៊ូអត់ធ្មត់, សន្តោសនិងស្មោះត្រង់, មិនរើសអើង, មិនច្រណែនឈ្នានីស, ស្មោះត្រង់, និងពិចារណាហេតុផលផ្លូវល្អ</label>
+                <label><input type="radio" name="q25" value="C"> ការបង្កើតច្បាប់ឱ្យបានតឹងរ៉ឹងបំផុត និងផាកពិន័យធ្ងន់ធ្ងរដល់អ្នកដែលមិនចូលរួមការងារសហគមន៍</label>
+            </div>
+            <div class="explanation" id="exp-q25"></div>
+        </div>
+
+        <div class="section-title">ផ្នែកទី ៧៖ វប្បធម៌ទូទៅ ៧ (រដ្ឋធម្មនុញ្ញ, ប្រាសាទបុរាណ, ទេសចរណ៍ និងគុណទាំង៦)</div>
+
+        <div class="question-block">
+            <div class="question-title">២៦. តើរដ្ឋធម្មនុញ្ញជាច្បាប់អ្វី? ហើយវាផ្តល់ផលប្រយោជន៍ចម្បងអ្វីខ្លះដល់ប្រទេសជាតិ?</div>
+            <div class="options">
+                <label><input type="radio" name="q26" value="A"> ជាច្បាប់សម្រាប់គ្រប់គ្រងតែមន្ត្រីរាជការ និងធានាកិច្ចសន្យាពាណិជ្ជកម្មអន្តរជាតិ</label>
+                <label><input type="radio" name="q26" value="B"> ជាច្បាប់កំពូលរបស់ជាតិ ធានាស្ថិរភាពសង្គម តុល្យភាពអំណាចទាំង៣ ភាពស្មើគ្នាចំពោះមុខច្បាប់ និងសិទ្ធិពលរដ្ឋ</label>
+                <label><input type="radio" name="q26" value="C"> ជាច្បាប់បណ្តោះអាសន្នដែលអាចផ្លាស់ប្តូរទៅតាមចំណង់ចំណូលចិត្តរបស់រដ្ឋាភិបាលនីមួយៗ</label>
+            </div>
+            <div class="explanation" id="exp-q26"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៧. មូលហេតុអ្វីបានជាបុព្វបុរសខ្មែរយើងកសាងប្រាសាទបុរាណជាច្រើនមហិមាបែបនេះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q27" value="A"> ព្រោះចង់បង្ហាញពីកម្លាំងយោធាដ៏ខ្លាំងក្លា និងទុកសម្រាប់ធ្វើជាជម្រកសត្វព្រៃក្នុងពេលសង្គ្រាម</label>
+                <label><input type="radio" name="q27" value="B"> ព្រោះតែបុព្វហេតុសាសនា, កិត្តិយសបារមីព្រះរាជា, យុទ្ធសាស្ត្រសង្គ្រាម, ប្រវត្តិសាស្ត្រល្បីល្បាញ, ទម្លាប់ និងការផ្លាស់ប្តូរទីក្រុង</label>
+                <label><input type="radio" name="q27" value="C"> ព្រោះមានថ្មភក់នៅសល់ច្រើនពេក និងដើម្បីរារាំងផ្លូវពាណិជ្ជកម្មរបស់ប្រទេសជិតខាង</label>
+            </div>
+            <div class="explanation" id="exp-q27"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៨. តើវិស័យទេសចរណ៍នៅកម្ពុជាបច្ចុប្បន្ន ត្រូវបានបែងចែកជាប៉ុន្មានប្រភេទចម្បងៗ? អ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q28" value="A"> ៣ ប្រភេទគឺ៖ ទេសចរណ៍ផ្លូវគោក, ទេសចរណ៍ផ្លូវទឹក, និងទេសចរណ៍ផ្លូវអាកាស</label>
+                <label><input type="radio" name="q28" value="B"> ៥ ប្រភេទគឺ៖ ទេសចរណ៍វប្បធម៌, ទេសចរណ៍ធម្មជាតិ, ទេសចរណ៍អរូបី, ទេសចរណ៍កែច្នៃ, និងទេសចរណ៍ជំនួញ</label>
+                <label><input type="radio" name="q28" value="C"> ៤ ប្រភេទគឺ៖ ទេសចរណ៍ប្រវត្តិសាស្ត្រ, ទេសចរណ៍តំបន់ភ្នំ, ទេសចរណ៍កោះ, និងទេសចរណ៍ម្ហូបអាហារ</label>
+            </div>
+            <div class="explanation" id="exp-q28"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">២៩. បុព្វបុរសខ្មែរតែងប្រៀនប្រដៅកូនចៅឱ្យដឹងគុណ និងចាប់អារម្មណ៍លើ "គុណ ៦ យ៉ាង"។ តើគុណទាំងនោះរួមមានអ្វីខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q29" value="A"> គុណមាស, គុណប្រាក់, គុណដីធ្លី, គុណផ្ទះសម្បែង, គុណយសស័ក្តិ, គុណអំណាច</label>
+                <label><input type="radio" name="q29" value="B"> គុណឪពុក, គុណម្តាយ, គុណបង/អ្នកដឹកនាំ, គុណគ្រូបាធ្យាយ, គុណញាតិមិត្តជិតឆ្ងាយ, គុណព្រះរតនត្រ័យ</label>
+                <label><input type="radio" name="q29" value="C"> គុណព្រះអាទិត្យ, គុណព្រះច័ន្ទ, គុណទឹក, គុណដី, គុណខ្យល់, គុណភ្លើង</label>
+            </div>
+            <div class="explanation" id="exp-q29"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៣០. ហេតុអ្វីបានជាពាក្យស្លោកបុរាណពោលថា "ទឹកគឺជាជីវិត"?</div>
+            <div class="options">
+                <label><input type="radio" name="q30" value="A"> ព្រោះទឹកមានតម្លៃថ្លៃជាងប្រេងកាត និងជាប្រភពចំណូលថវិកាជាតិដ៏ធំបំផុត</label>
+                <label><input type="radio" name="q30" value="B"> ព្រោះវាជាតម្រូវការចាំបាច់ដាច់ខាតសម្រាប់មនុស្ស សត្វ រុក្ខជាតិ បរិភោគ ទ្រទ្រង់សរីរាង្គ កសិកម្ម និងបរិស្ថានរស់រានមានជីវិត</label>
+                <label><input type="radio" name="q30" value="C"> ព្រោះទឹកជួយធ្វើឱ្យផ្ទះសម្បែងស្អាត និងការពារសង្គមជាតិពីការកើតមានគ្រោះអគ្គិភ័យ</label>
+            </div>
+            <div class="explanation" id="exp-q30"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៣១. តើមីនមានប៉ុន្មានប្រភេទ?</div>
+            <div class="options">
+                <label><input type="radio" name="q31" value="A"> A. មានពីរប្រភេទ គឺមីនប្រឆាំងមនុស្ស និងមីនប្រឆាំងរថក្រោះ</label>
+                <label><input type="radio" name="q31" value="B"> B. មានបីប្រភេទ</label>
+                <label><input type="radio" name="q31" value="C"> C. មានបួនប្រភេទ</label>
+            </div>
+            <div class="explanation" id="exp-q31"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣២. តើប្រាសាទអង្គរវត្តមានសរសរប៉ុន្មាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q32" value="A"> A. ១៥០០ ដើម</label>
+                <label><input type="radio" name="q32" value="B"> B. ១៥៣២ ដើម</label>
+                <label><input type="radio" name="q32" value="C"> C. ១៦០០ ដើម</label>
+            </div>
+            <div class="explanation" id="exp-q32"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣៣. តើគ្រូបង្រៀនមានភារកិច្ចប៉ុន្មាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q33" value="A"> A. ៣ យ៉ាង</label>
+                <label><input type="radio" name="q33" value="B"> B. ៤ យ៉ាង</label>
+                <label><input type="radio" name="q33" value="C"> C. ៥ យ៉ាង</label>
+            </div>
+            <div class="explanation" id="exp-q33"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣៤. តើលោកតាក្រមង៉ុយប្រសូត្រនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q34" value="A"> A. ឆ្នាំ ១៨៦៥</label>
+                <label><input type="radio" name="q34" value="B"> B. ឆ្នាំ ១៨៧០</label>
+                <label><input type="radio" name="q34" value="C"> C. ឆ្នាំ ១៩៣៦</label>
+            </div>
+            <div class="explanation" id="exp-q34"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">៣៥. តើសិល្បៈមានប៉ុន្មានទម្រង់?</div>
+            <div class="options">
+                <label><input type="radio" name="q35" value="A"> A. ៥ ទម្រង់</label>
+                <label><input type="radio" name="q35" value="B"> B. ៦ ទម្រង់</label>
+                <label><input type="radio" name="q35" value="C"> C. ៧ ទម្រង់</label>
+            </div>
+            <div class="explanation" id="exp-q35"></div>
+        </div>
+
+
+        
+        <div class="question-block">
+            <div class="question-title">៣៦. តើស្ពានអ្នកលឿងមានប្រវែងប៉ុន្មាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q36" value="A"> A. ២០០០ ម៉ែត្រ</label>
+                <label><input type="radio" name="q36" value="B"> B. ២២១៥ ម៉ែត្រ</label>
+                <label><input type="radio" name="q36" value="C"> C. ២៥០០ ម៉ែត្រ</label>
+            </div>
+            <div class="explanation" id="exp-q36"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣៧. តើស្ពានជ្រោយចង្វាត្រូវបានខ្មែរក្រហមបំផ្លាញនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q37" value="A"> A. ថ្ងៃទី២៧ ខែមីនា ឆ្នាំ១៩៧២</label>
+                <label><input type="radio" name="q37" value="B"> B. ថ្ងៃទី១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q37" value="C"> C. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩</label>
+            </div>
+            <div class="explanation" id="exp-q37"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣៨. តើប្រាសាទព្រះវិហារចូលជាសម្បត្តិបេតិកភណ្ឌពិភពលោកនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q38" value="A"> A. ថ្ងៃទី១៥ ខែមិថុនា ឆ្នាំ១៩៦២</label>
+                <label><input type="radio" name="q38" value="B"> B. ថ្ងៃទី០៧ ខែកក្កដា ឆ្នាំ២០០៨</label>
+                <label><input type="radio" name="q38" value="C"> C. ថ្ងៃទី១៤ ខែធ្នូ ឆ្នាំ១៩៩២</label>
+            </div>
+            <div class="explanation" id="exp-q38"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៣៩. តើប្រាសាទកោះកេរស្ថិតនៅក្នុងខេត្តណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q39" value="A"> A. ខេត្តសៀមរាប</label>
+                <label><input type="radio" name="q39" value="B"> B. ខេត្តព្រះវិហារ</label>
+                <label><input type="radio" name="q39" value="C"> C. ខេត្តកំពង់ធំ</label>
+            </div>
+            <div class="explanation" id="exp-q39"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤០. តើអង្គការសហប្រជាជាតិអនុម័តអនុសញ្ញាអន្តរជាតិស្តីពីសិទ្ធិកុមារនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q40" value="A"> A. ថ្ងៃទី២០ ខែវិច្ឆិកា ឆ្នាំ១៩៨៩</label>
+                <label><input type="radio" name="q40" value="B"> B. ថ្ងៃទី ២៣ តុលា ឆ្នាំ ១៩៩១</label>
+                <label><input type="radio" name="q40" value="C"> C. ថ្ងៃទី ១០ ធ្នូ ឆ្នាំ ១៩៤៨</label>
+            </div>
+            <div class="explanation" id="exp-q40"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤១.
+                តើអនុក្រឹតស្តីអំពីក្រមសីលធម៌វិជ្ជាជីវៈគ្រូបង្រៀនត្រូវបានចុះហត្ថលេខាដាក់ឱ្យប្រើប្រាស់នៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q41" value="A"> A. ថ្ងៃទី០៩ ខែកញ្ញា ឆ្នាំ២០០៨</label>
+                <label><input type="radio" name="q41" value="B"> B. ថ្ងៃទី០៥ ខែតុលា ឆ្នាំ២០១៥</label>
+                <label><input type="radio" name="q41" value="C"> C. ថ្ងៃទី២០ ខែធ្នូ ឆ្នាំ២០១០</label>
+            </div>
+            <div class="explanation" id="exp-q41"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤២. តើក្រមសីលធម៌វិជ្ជាជីវៈគ្រូបង្រៀនត្រូវបានបង្កើតឡើងដើម្បីអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q42" value="A"> A.
+                    ដើម្បីកំណត់ក្រមសីលធម៌វិជ្ជាជីវៈសម្រាប់គ្រូបង្រៀននៅក្នុងព្រះរាជាណាចក្រកម្ពុជា</label>
+                <label><input type="radio" name="q42" value="B"> B. ដើម្បីកំណត់ប្រាក់បៀវត្សរ៍គ្រូបង្រៀន</label>
+                <label><input type="radio" name="q42" value="C"> C. ដើម្បីរៀបចំការប្រឡងគ្រូ</label>
+            </div>
+            <div class="explanation" id="exp-q42"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៣. តើសម្តេចព្រះសង្ឃរាជ ជួន ណាត ប្រសូតនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q43" value="A"> A. ថ្ងៃទី១១ ខែមីនា ឆ្នាំ១៨៨៣</label>
+                <label><input type="radio" name="q43" value="B"> B. ថ្ងៃទី២៥ ខែកញ្ញា ឆ្នាំ១៩៦៩</label>
+                <label><input type="radio" name="q43" value="C"> C. ថ្ងៃទី០៨ ខែមីនា ឆ្នាំ១៨៨៨</label>
+            </div>
+            <div class="explanation" id="exp-q43"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៤. តើវិមានឈ្នះឈ្នះស្ថិតនៅក្នុងខណ្ឌណានរាធានីភ្នំពេញ?</div>
+            <div class="options">
+                <label><input type="radio" name="q44" value="A"> A. ខណ្ឌព្រែកព្នៅ</label>
+                <label><input type="radio" name="q44" value="B"> B. ខណ្ឌជ្រោយចង្វារ (សង្កាត់ព្រែកតាសេក)</label>
+                <label><input type="radio" name="q44" value="C"> C. ខណ្ឌសែនសុខ</label>
+            </div>
+            <div class="explanation" id="exp-q44"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៥. តើមហេសីទី១របស់ព្រះបាទជ័យវរ័ន្មទី៧ព្រះនាមអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q45" value="A"> A. ព្រះនាងឥន្ទ្រទេវី</label>
+                <label><input type="radio" name="q45" value="B"> B. ព្រះនាងជ័យរាជទេវី</label>
+                <label><input type="radio" name="q45" value="C"> C. ព្រះនាងសោមា</label>
+            </div>
+            <div class="explanation" id="exp-q45"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៦. តើភ្នំសន្ទុកស្ថិតនៅក្នុងខេត្តណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q46" value="A"> A. ខេត្តកំពង់ចាម</label>
+                <label><input type="radio" name="q46" value="B"> B. ខេត្តកំពង់ធំ</label>
+                <label><input type="radio" name="q46" value="C"> C. ខេត្តសៀមរាប</label>
+            </div>
+            <div class="explanation" id="exp-q46"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៧. តើព្រះពុទ្ធសាសនារុងរឿងនៅប្រទេសណា? ក្នុងរជ្ជកាលស្ដេចអង្គណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q47" value="A"> A. ប្រទេសឥណ្ឌា ក្នុងរជ្ជកាលព្រះបាទអសោក</label>
+                <label><input type="radio" name="q47" value="B"> B. ប្រទេសកម្ពុជា ក្នុងរជ្ជកាលព្រះបាទជ័យវរ្ម័នទី៧</label>
+                <label><input type="radio" name="q47" value="C"> C. ប្រទេសស្រីលង្កា</label>
+            </div>
+            <div class="explanation" id="exp-q47"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៨. តើព្រះពុទ្ធសាសនាចូលមកក្នុងប្រទេសកម្ពុជាតាមរយៈអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q48" value="A"> A. តាមរយៈសង្គ្រាម</label>
+                <label><input type="radio" name="q48" value="B"> B. តាមរយៈអាណានិគមន៍(អ្នកមានឥទ្ធិពល) ឈ្មួញរកស៊ី
+                    និងតាមអ្នកផ្សព្វផ្សាយសាសនា</label>
+                <label><input type="radio" name="q48" value="C"> C. តាមរយៈការដោះដូរដីធ្លី</label>
+            </div>
+            <div class="explanation" id="exp-q48"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៤៩. តើសម្តេចមហាបវរធិបតីហ៊ុន ម៉ាណែតឡើងកាន់ដំណែងជានាយករដ្ឋមន្ត្រីនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q49" value="A"> A. ថ្ងៃទី២២ ខែសីហា ឆ្នាំ២០២៣</label>
+                <label><input type="radio" name="q49" value="B"> B. ថ្ងៃទី០៧ ខែសីហា ឆ្នាំ២០២៣</label>
+                <label><input type="radio" name="q49" value="C"> C. ថ្ងៃទី២២ ខែកញ្ញា ឆ្នាំ២០២៣</label>
+            </div>
+            <div class="explanation" id="exp-q49"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥០. តើប្រាសាទព្រះវិហារកសាងឡើងដោយស្តេចអង្គណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q50" value="A"> A. ព្រះបាទយសោវរ្ម័នទី១</label>
+                <label><input type="radio" name="q50" value="B"> B. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                <label><input type="radio" name="q50" value="C"> C. ព្រះបាទយសោវរ្ម័នទី១ ព្រះបាទសូរ្យវរ្ម័នទី១
+                    និងព្រះបាទសូរ្យវរ្ម័នទី២</label>
+            </div>
+            <div class="explanation" id="exp-q50"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥១. តើជំរឿនឆ្នាំ២០០៨ប្រព្រឹត្តិទៅនៅថ្ងៃខែណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q51" value="A"> A. ថ្ងៃទី៣-១៣ ខែមីនា</label>
+                <label><input type="radio" name="q51" value="B"> B. ថ្ងៃទី៣-១៣ ខែមេសា</label>
+                <label><input type="radio" name="q51" value="C"> C. ថ្ងៃទី១-១០ ខែវិច្ឆិកា</label>
+            </div>
+            <div class="explanation" id="exp-q51"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥២. តើទិវាគ្រូបង្រៀននរណាជាអ្នកផ្តួចផ្ដើមគំនិត?</div>
+            <div class="options">
+                <label><input type="radio" name="q52" value="A"> A. សម្ដេចក្រឡាហោម ស ខេង</label>
+                <label><input type="radio" name="q52" value="B"> B. សម្ដេចតេជោ ហ៊ុន សែន</label>
+                <label><input type="radio" name="q52" value="C"> C. សម្ដេចធិបតី ហ៊ុន ម៉ាណែត</label>
+            </div>
+            <div class="explanation" id="exp-q52"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៣. តើបទមើលផែនដីខ្មែរនិពន្ធដោយអ្នកណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q53" value="A"> A. លោក ជួន ម៉េន</label>
+                <label><input type="radio" name="q53" value="B"> B. សម្តេចព្រះសង្ឃរាជ ជួន ណាត</label>
+                <label><input type="radio" name="q53" value="C"> C. លោក នូ កន</label>
+            </div>
+            <div class="explanation" id="exp-q53"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៤. តើបទនគររាជនិពន្ធនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q54" value="A"> A. ថ្ងៃទី ២០ ខែកក្កដា ឆ្នាំ១៩៤១</label>
+                <label><input type="radio" name="q54" value="B"> B. ថ្ងៃទី ០៩ ខែវិច្ឆិកា ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q54" value="C"> C. ថ្ងៃទី ១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+            </div>
+            <div class="explanation" id="exp-q54"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៥. តើរចនាបថប្រាសាទមានប៉ុន្មាន?</div>
+            <div class="options">
+                <label><input type="radio" name="q55" value="A"> A. មានចំនួន ១០</label>
+                <label><input type="radio" name="q55" value="B"> B. មានចំនួន ១១</label>
+                <label><input type="radio" name="q55" value="C"> C. មានចំនួន ១៣</label>
+            </div>
+            <div class="explanation" id="exp-q55"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៦. តើរបបកុម្មុយនីស្តគាំទ្រដោយវណ្ណៈអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q56" value="A"> A. វណ្ណៈអភិជន និងសេដ្ឋី</label>
+                <label><input type="radio" name="q56" value="B"> B. វណ្ណៈកណ្តាល</label>
+                <label><input type="radio" name="q56" value="C"> C. វណ្ណៈកម្មករ ឬកសិករ</label>
+            </div>
+            <div class="explanation" id="exp-q56"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៧. តើភ្លេងខ្មែរមានប៉ុន្មានវង់?</div>
+            <div class="options">
+                <label><input type="radio" name="q57" value="A"> A. ភ្លេងខ្មែរមាន ៦ វង់</label>
+                <label><input type="radio" name="q57" value="B"> B. ភ្លេងខ្មែរមាន ៨ វង់</label>
+                <label><input type="radio" name="q57" value="C"> C. ភ្លេងខ្មែរមាន ១០ វង់</label>
+            </div>
+            <div class="explanation" id="exp-q57"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៨. តើជនជាតិដែលស្ថិតក្នុងអំបូរខ្មែរមនដែរគឺជាជនជាតិអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q58" value="A"> A. ជនជាតិចាម</label>
+                <label><input type="radio" name="q58" value="B"> B. ជនជាតិគ្រឹង</label>
+                <label><input type="radio" name="q58" value="C"> C. ជនជាតិចិន</label>
+            </div>
+            <div class="explanation" id="exp-q58"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៥៩. តើសមាជិកព្រឹទ្ធសភាតែងតាំងដោយនរណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q59" value="A"> A. តែងតាំងដោយនាយករដ្ឋមន្ត្រី</label>
+                <label><input type="radio" name="q59" value="B"> B. តែងតាំងដោយប្រធានរដ្ឋសភា</label>
+                <label><input type="radio" name="q59" value="C"> C. តែងតាំងដោយព្រះមហាក្សត្រ</label>
+            </div>
+            <div class="explanation" id="exp-q59"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦០. តើជាតិមួយមានការលេចធ្លោខុសពីជាតិសាសន៍ដ៏ទៃគេហៅថាអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q60" value="A"> A. លក្ខណៈជាតិ</label>
+                <label><input type="radio" name="q60" value="B"> B. វប្បធម៌បរទេស</label>
+                <label><input type="radio" name="q60" value="C"> C. អត្តសញ្ញាណប័ណ្ណ</label>
+            </div>
+            <div class="explanation" id="exp-q60"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦១. តើសាសនាព្រាហ្មមានប៉ុន្មានគណៈ?</div>
+            <div class="options">
+                <label><input type="radio" name="q61" value="A"> A. មាន ២ គណៈ</label>
+                <label><input type="radio" name="q61" value="B"> B. មាន ៣ គណៈ</label>
+                <label><input type="radio" name="q61" value="C"> C. មាន ៤ គណៈ</label>
+            </div>
+            <div class="explanation" id="exp-q61"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦២. តើចម្លាក់ខ្មែរមានប៉ុន្មានប្រភេទ?</div>
+            <div class="options">
+                <label><input type="radio" name="q62" value="A"> A. មាន ៣ ប្រភេទ គឺ លៀន លិប លោត</label>
+                <label><input type="radio" name="q62" value="B"> B. មាន ៤ ប្រភេទ</label>
+                <label><input type="radio" name="q62" value="C"> C. មាន ៥ ប្រភេទ</label>
+            </div>
+            <div class="explanation" id="exp-q62"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៣. តើប្រាសាទក្នុងរជ្ជកាលរបស់ព្រះបាទជ័យវរ្ម័នទី៧ មានព្រហ្មមុខបួនតំណាងឲ្យអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q63" value="A"> A. តំណាងឲ្យទិសទាំងបួន</label>
+                <label><input type="radio" name="q63" value="B"> B. តំណាងឲ្យធាតុទាំងបួន គឺ ដី ទឹក ភ្លើង ខ្យល់</label>
+                <label><input type="radio" name="q63" value="C"> C. តំណាងឲ្យព្រហ្មវិហារធម៌ទាំងបួន គឺ មេត្តា ករុណា មុទិតា
+                    និងឧបេក្ខា</label>
+            </div>
+            <div class="explanation" id="exp-q63"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៤. តើប្រាសាទអង្គរកសាងឧទ្ទិសដល់អ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q64" value="A"> A. ឧទ្ទិសដល់ព្រះសិវៈ ឬព្រះឥសូរ</label>
+                <label><input type="radio" name="q64" value="B"> B. ឧទ្ទិសដល់ព្រះវិស្ណុ ឬព្រះនរាយណ៍</label>
+                <label><input type="radio" name="q64" value="C"> C. ឧទ្ទិសដល់ព្រះពុទ្ធសាសនា</label>
+            </div>
+            <div class="explanation" id="exp-q64"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៥. តើព្រែកជីកហ្វូណនតេជោឆ្លងកាត់ខេត្តណាខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q65" value="A"> A. ខេត្តកណ្តាល ខេត្តតាកែវ ខេត្តកំពត និងខេត្តកែប</label>
+                <label><input type="radio" name="q65" value="B"> B. ខេត្តព្រះសីហនុ ខេត្តកោះកុង និងខេត្តកំពត</label>
+                <label><input type="radio" name="q65" value="C"> C. ខេត្តកណ្តាល ខេត្តព្រៃវែង និងខេត្តស្វាយរៀង</label>
+            </div>
+            <div class="explanation" id="exp-q65"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៦. តើប្រទេសកម្ពុជាបានចូលជាសមាជិកអង្គការសហប្រជាជាតិនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q66" value="A"> A. ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q66" value="B"> B. ឆ្នាំ១៩៥៥</label>
+                <label><input type="radio" name="q66" value="C"> C. ឆ្នាំ១៩៩៣</label>
+            </div>
+            <div class="explanation" id="exp-q66"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៧. តើសម័យអាណានិគមនិយមបារាំងចាប់ផ្តើមនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q67" value="A"> A. ឆ្នាំ១៨៦៣</label>
+                <label><input type="radio" name="q67" value="B"> B. ឆ្នាំ១៨៨៤</label>
+                <label><input type="radio" name="q67" value="C"> C. ឆ្នាំ១៩៤៥</label>
+            </div>
+            <div class="explanation" id="exp-q67"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៨. តើសម័យអាណានិគមនិយមបារាំងគ្រប់គ្រងដោយស្តេចអង្គណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q68" value="A"> A. ព្រះបាទ នរោត្តម (១៨៦០ ដល់១៩០៤)</label>
+                <label><input type="radio" name="q68" value="B"> B. ព្រះបាទ ស៊ីសុវត្ថិ</label>
+                <label><input type="radio" name="q68" value="C"> C. ព្រះបាទ នរោត្តម សីហនុ</label>
+            </div>
+            <div class="explanation" id="exp-q68"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៦៩. តើប្រទេសកម្ពុជាទទួលបានឯករាជ្យនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q69" value="A"> A. ឆ្នាំ១៩៤៥</label>
+                <label><input type="radio" name="q69" value="B"> B. ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q69" value="C"> C. ឆ្នាំ១៩៧០</label>
+            </div>
+            <div class="explanation" id="exp-q69"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧០. តើសម័យកម្ពុជាទីមួយត្រូវបានបញ្ចប់នៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q70" value="A"> A. ឆ្នាំ១៩៧០</label>
+                <label><input type="radio" name="q70" value="B"> B. ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q70" value="C"> C. ឆ្នាំ១៩៧៩</label>
+            </div>
+            <div class="explanation" id="exp-q70"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧១. តើសម័យអាណាព្យាបាលបារាំងស្ដេចអង្គណាដែលទៅពឹងបារាំងឲ្យធ្វើជាខ្នងបង្អែក?</div>
+            <div class="options">
+                <label><input type="radio" name="q71" value="A"> A. ព្រះបាទនរោត្តម</label>
+                <label><input type="radio" name="q71" value="B"> B. ព្រះបាទអង្គឌួង</label>
+                <label><input type="radio" name="q71" value="C"> C. ព្រះបាទស៊ីសុវត្ថិ</label>
+            </div>
+            <div class="explanation" id="exp-q71"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧២. តើកត្តាអ្វីខ្លះដែលបណ្ដាលឱ្យមានគ្រោះថ្នាក់ចរាចរណ៍?</div>
+            <div class="options">
+                <label><input type="radio" name="q72" value="A"> A. កត្តាមនុស្ស កត្តាយានយន្ត កត្តាផ្លូវថ្នល់
+                    និងកត្តាអាកាសធាតុ</label>
+                <label><input type="radio" name="q72" value="B"> B. កត្តាសេដ្ឋកិច្ច និងកត្តាច្បាប់</label>
+                <label><input type="radio" name="q72" value="C"> C. កត្តាអប់រំ និងកត្តាចរន្តអគ្គិសនី</label>
+            </div>
+            <div class="explanation" id="exp-q72"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៣. តើយើងគួរធ្វើបែបណាដើម្បីកាត់បន្ថយកម្ដៅផែនដី?</div>
+            <div class="options">
+                <label><input type="radio" name="q73" value="A"> A. ការកាប់បំផ្លាញព្រៃឈើដើម្បីពង្រីកក្រុង</label>
+                <label><input type="radio" name="q73" value="B"> B. បង្កើនការប្រើប្រាស់ឥន្ធនៈផូស៊ីល និងធ្យូងថ្ម</label>
+                <label><input type="radio" name="q73" value="C"> C. ដាំដើមឈើ កាត់បន្ថយឥន្ធនៈផូស៊ីល គ្រប់គ្រងសំណល់ឧស្ម័ន
+                    និងប្រើវត្ថុមិនបង្កគ្រោះថ្នាក់ដល់បរិស្ថាន</label>
+            </div>
+            <div class="explanation" id="exp-q73"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៤. តើប្រទេសកម្ពុជាបានចូលជាសមាជិកអាស៊ាននៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q74" value="A"> A. ថ្ងៃទី០៨ ខែសីហា ឆ្នាំ១៩៦៧</label>
+                <label><input type="radio" name="q74" value="B"> B. ថ្ងៃទី៣០ ខែមេសា ឆ្នាំ១៩៩៩</label>
+                <label><input type="radio" name="q74" value="C"> C. ថ្ងៃទី២៣ ខែតុលា ឆ្នាំ១៩៩១</label>
+            </div>
+            <div class="explanation" id="exp-q74"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៥. តើឥស្សរជនឆ្នើមខ្មែររូបណាដែលបញ្ចប់សង្គ្រាមស៊ីវិលនៅកម្ពុជា?</div>
+            <div class="options">
+                <label><input type="radio" name="q75" value="A"> A. សម្ដេចតេជោ ហ៊ុន សែន (ក្រោមជ័យជម្នះនៃនយោបាយឈ្នះ-ឈ្នះ ថ្ងៃទី២៩
+                    ធ្នូ ១៩៩៨)</label>
+                <label><input type="radio" name="q75" value="B"> B. លន់ នល់</label>
+                <label><input type="radio" name="q75" value="C"> C. ប៉ុល ពត</label>
+            </div>
+            <div class="explanation" id="exp-q75"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៦. តើច្បាប់ប្រឆាំងអំពើពុករលួយត្រូវប្រកាសឲ្យប្រើប្រាស់នៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q76" value="A"> A. ឆ្នាំ១៩៩៣</label>
+                <label><input type="radio" name="q76" value="B"> B. ឆ្នាំ២០១០</label>
+                <label><input type="radio" name="q76" value="C"> C. ឆ្នាំ២០១៥</label>
+            </div>
+            <div class="explanation" id="exp-q76"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៧. តើអ្នកណាជាអ្នកផ្ដួចផ្ដើមគំនិតបង្កើតទិវាជាតិអំណានឡើង?</div>
+            <div class="options">
+                <label><input type="radio" name="q77" value="A"> A. សម្តេច តេជោ ហ៊ុន សែន</label>
+                <label><input type="radio" name="q77" value="B"> B. សម្តេចធិបតី ហ៊ុន ម៉ាណែត</label>
+                <label><input type="radio" name="q77" value="C"> C. សម្តេចព្រះសង្ឃរាជ ជួន ណាត</label>
+            </div>
+            <div class="explanation" id="exp-q77"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៨. តើទិវាជាតិអំណានត្រូវប្រារព្ធឡើងនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q78" value="A"> A. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩</label>
+                <label><input type="radio" name="q78" value="B"> B. ថ្ងៃទី១១ ខែមីនា ឆ្នាំ២០១៥</label>
+                <label><input type="radio" name="q78" value="C"> C. ថ្ងៃទី២៣ ខែតុលា ឆ្នាំ១៩៩១</label>
+            </div>
+            <div class="explanation" id="exp-q78"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៧៩. តើប្រាសាទអង្គរចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q79" value="A"> A. ថ្ងៃទី១៤ ខែធ្នូ ឆ្នាំ១៩៩២</label>
+                <label><input type="radio" name="q79" value="B"> B. ថ្ងៃទី០៧ ខែកក្កដា ឆ្នាំ២០០៨</label>
+                <label><input type="radio" name="q79" value="C"> C. ថ្ងៃទី១៧ ខែកញ្ញា ឆ្នាំ២០២៣</label>
+            </div>
+            <div class="explanation" id="exp-q79"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨០. តើកម្ពុជាបានប្រកាសរដ្ឋធម្មនុញ្ញនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q80" value="A"> A. ថ្ងៃទី០៩ ខែវិច្ឆិកា ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q80" value="B"> B. ថ្ងៃទី២៤ ខែកញ្ញា ឆ្នាំ១៩៩៣</label>
+                <label><input type="radio" name="q80" value="C"> C. ថ្ងៃទី១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+            </div>
+            <div class="explanation" id="exp-q80"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨១. តើស្ថាបនិកទាំង ៥ របស់អាស៊ានមានប្រទេសណាខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q81" value="A"> A. ឥណ្ឌូណេស៊ី ម៉ឡេស៊ី ហ្វីលីពីន សិង្ហបុរី និងថៃ</label>
+                <label><input type="radio" name="q81" value="B"> B. កម្ពុជា ឡាវ វៀតណាម ភូមា និងប្រ៊ុយណេ</label>
+                <label><input type="radio" name="q81" value="C"> C. ថៃ វៀតណាម ឡាវ កម្ពុជា និងមីយ៉ាន់ម៉ា</label>
+            </div>
+            <div class="explanation" id="exp-q81"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨២. តើកម្ពុជាអនុវត្តនយោបាយអព្យាក្រឹត្យនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q82" value="A"> A. ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q82" value="B"> B. ឆ្នាំ១៩៥៥</label>
+                <label><input type="radio" name="q82" value="C"> C. ឆ្នាំ១៩៧០</label>
+            </div>
+            <div class="explanation" id="exp-q82"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៣. តើសម្តេចនរោត្តមសីហនុ ឡើងសោយរាជ្យលើកទី២ នៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q83" value="A"> A. ថ្ងៃទី២៤ ខែកញ្ញា ឆ្នាំ១៩៩៣</label>
+                <label><input type="radio" name="q83" value="B"> B. ថ្ងៃទី០៩ ខែវិច្ឆិកា ឆ្នាំ១៩៥៣</label>
+                <label><input type="radio" name="q83" value="C"> C. ថ្ងៃទី១៨ ខែមីនា ឆ្នាំ១៩៧០</label>
+            </div>
+            <div class="explanation" id="exp-q83"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៤. តើសន្តិភាពពេញលេញនៅកម្ពុជាចាប់ផ្ដើមនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q84" value="A"> A. ថ្ងៃទី២៣ ខែតុលា ឆ្នាំ១៩៩១</label>
+                <label><input type="radio" name="q84" value="B"> B. ថ្ងៃទី២៩ ខែធ្នូ ឆ្នាំ១៩៩៨</label>
+                <label><input type="radio" name="q84" value="C"> C. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩</label>
+            </div>
+            <div class="explanation" id="exp-q84"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៥. តើព្រះបាទអង្គឌួងសោយរាជ្យពីឆ្នាំណាដល់ឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q85" value="A"> A. ពីឆ្នាំ១៨៤១ ដល់ឆ្នាំ១៨៦០</label>
+                <label><input type="radio" name="q85" value="B"> B. ពីឆ្នាំ១៨៦០ ដល់ឆ្នាំ១៩៧០</label>
+                <label><input type="radio" name="q85" value="C"> C. ពីឆ្នាំ១៩០៤ ដល់ឆ្នាំ១៩២៧</label>
+            </div>
+            <div class="explanation" id="exp-q85"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៦. តើស្ដេចខ្មែរដែលសោយរាជ្យសម័យអាណាព្យាបាលបារាំងមានស្ដេចអង្គណាខ្លះ?</div>
+            <div class="options">
+                <label><input type="radio" name="q86" value="A"> A. ព្រះបាទនរោត្តម, ព្រះបាទស៊ីសុវត្ថិ, ព្រះបាទស៊ីសុវត្ថិ
+                    មុនីវង្ស, ព្រះបាទនរោត្តម សីហនុ (លើកទី១)</label>
+                <label><input type="radio" name="q86" value="B"> B. ព្រះបាទអង្គឌួង និងព្រះបាទនរោត្តម សីហមុនី</label>
+                <label><input type="radio" name="q86" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៧ និងព្រះបាទបរមរាជា</label>
+            </div>
+            <div class="explanation" id="exp-q86"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៧. តើកម្ពុជាចូលជាសមាជិកអង្គការពាណិជ្ជកម្មពិភពលោកនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q87" value="A"> A. ថ្ងៃទី១៣ ខែតុលា ឆ្នាំ២០០៤</label>
+                <label><input type="radio" name="q87" value="B"> B. ថ្ងៃទី៣០ ខែមេសា ឆ្នាំ១៩៩៩</label>
+                <label><input type="radio" name="q87" value="C"> C. ថ្ងៃទី១៤ ខែធ្នូ ឆ្នាំ១៩៩២</label>
+            </div>
+            <div class="explanation" id="exp-q87"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៨. តើខ្មែរក្រហមវាយចូលទីក្រុងភ្នំពេញនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q88" value="A"> A. ថ្ងៃទី១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q88" value="B"> B. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩</label>
+                <label><input type="radio" name="q88" value="C"> C. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧០</label>
+            </div>
+            <div class="explanation" id="exp-q88"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៨៩. តើកម្ពុជារួចផុតពីសម័យខ្មែរក្រហមនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q89" value="A"> A. ថ្ងៃទី១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q89" value="B"> B. ថ្ងៃទី២៣ ខែតុលា ឆ្នាំ១៩៩១</label>
+                <label><input type="radio" name="q89" value="C"> C. ថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩</label>
+            </div>
+            <div class="explanation" id="exp-q89"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩០. តើរដ្ឋប្រហារទម្លាក់សម្តេចនរោត្តមសីហនុធ្វើឡើងនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q90" value="A"> A. ថ្ងៃទី១៨ ខែមីនា ឆ្នាំ១៩៧០</label>
+                <label><input type="radio" name="q90" value="B"> B. ថ្ងៃទី១៧ ខែមេសា ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q90" value="C"> C. ថ្ងៃទី២៩ ខែធ្នូ ឆ្នាំ១៩៩៨</label>
+            </div>
+            <div class="explanation" id="exp-q90"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩១. តើនរណាជាមេដឹកនាំធ្វើរដ្ឋប្រហារទម្លាក់សម្តេចនរោត្តមសីហនុ?</div>
+            <div class="options">
+                <label><input type="radio" name="q91" value="A"> A. ព្រះបាទនរោត្តម សុរាម្រិត</label>
+                <label><input type="radio" name="q91" value="B"> B. លោកសេនាប្រមុខ លន់ នល់ និងអ្នកអង្គម្ចាស់ស៊ីសុវត្ថិ
+                    សិរិមតៈ</label>
+                <label><input type="radio" name="q91" value="C"> C. លោក ប៉ុល ពត និងលោក ខៀវ សំផន</label>
+            </div>
+            <div class="explanation" id="exp-q91"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩២. តើដើមអ្វីដែលយើងដាំដើម្បីការពារខ្យល់?</div>
+            <div class="options">
+                <label><input type="radio" name="q92" value="A"> A. ដើមឫស្សី</label>
+                <label><input type="radio" name="q92" value="B"> B. ដើមផ្កាឈូក</label>
+                <label><input type="radio" name="q92" value="C"> C. ដើមស្មៅ</label>
+            </div>
+            <div class="explanation" id="exp-q92"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៣. តើនៅក្នុងសម័យសង្គមរាស្ត្រនិយមប្រកាន់យករបបនយោបាយអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q93" value="A"> A. របបកុម្មុយនីស្តបក្សតែមួយ</label>
+                <label><input type="radio" name="q93" value="B"> B. របបសេរីពហុបក្សនិយមអាមេរិក</label>
+                <label><input type="radio" name="q93" value="C"> C. របបនយោបាយអព្យាក្រឹត្យ</label>
+            </div>
+            <div class="explanation" id="exp-q93"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៤. តើអាស៊ានបង្កើតនៅថ្ងៃខែឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q94" value="A"> A. ថ្ងៃទី០៨ ខែសីហា ឆ្នាំ១៩៦៧</label>
+                <label><input type="radio" name="q94" value="B"> B. ថ្ងៃទី៣០ ខែមេសា ឆ្នាំ១៩៩៩</label>
+                <label><input type="radio" name="q94" value="C"> C. ថ្ងៃទី២៣ ខែតុលា ឆ្នាំ១៩៩១</label>
+            </div>
+            <div class="explanation" id="exp-q94"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៥. តើសម័យកម្ពុជាទីពីរត្រូវបានចាប់ផ្ដើមនៅឆ្នាំណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q95" value="A"> A. ឆ្នាំ១៩៧៥</label>
+                <label><input type="radio" name="q95" value="B"> B. ឆ្នាំ១៩៧៩</label>
+                <label><input type="radio" name="q95" value="C"> C. ឆ្នាំ១៩៩៣</label>
+            </div>
+            <div class="explanation" id="exp-q95"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៦. មានជនល្មើសបុកជនរងគ្រោះបណ្តាលឲ្យស្លាប់បាត់បង់ជីវិត ជនល្មើសបានរត់គេចខ្លួន
+                តើនេះជាទោសលើផ្នែកអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q96" value="A"> A. ទោសលើផ្នែករដ្ឋប្បវេណី</label>
+                <label><input type="radio" name="q96" value="B"> B. ទោសលើផ្នែកព្រហ្មទណ្ឌ</label>
+                <label><input type="radio" name="q96" value="C"> C. ទោសលើផ្នែករដ្ឋបាល</label>
+            </div>
+            <div class="explanation" id="exp-q96"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៧. តើនយោបាយរបស់សម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត ផ្ដោតសំខាន់លើអ្វី?</div>
+            <div class="options">
+                <label><input type="radio" name="q97" value="A"> A. ការពង្រឹងមូលដ្ឋានសម្រាប់ការអភិវឌ្ឍជាតិ</label>
+                <label><input type="radio" name="q97" value="B"> B. ការធ្វើឧស្សាហូបនីយកម្មធុនធ្ងន់តែមួយមុខ</label>
+                <label><input type="radio" name="q97" value="C"> C. ការកាត់ផ្តាច់ទំនាក់ទំនងពាណិជ្ជកម្មក្រៅប្រទេស</label>
+            </div>
+            <div class="explanation" id="exp-q97"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៨. តើនរណាជានាយករដ្ឋមន្ត្រីនៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ?</div>
+            <div class="options">
+                <label><input type="radio" name="q98" value="A"> A. សម្តេច នរោត្តម សីហនុ</label>
+                <label><input type="radio" name="q98" value="B"> B. លោក ប៉ុល ពត</label>
+                <label><input type="radio" name="q98" value="C"> C. លោក ហេង សំរិន</label>
+            </div>
+            <div class="explanation" id="exp-q98"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">៩៩. តើនរណាជាអ្នកបង្កើតព្រះពុទ្ធសាសនា?</div>
+            <div class="options">
+                <label><input type="radio" name="q99" value="A"> A. ព្រះបាទអសោកមហារាជ</label>
+                <label><input type="radio" name="q99" value="B"> B. ព្រះអានន្ទ</label>
+                <label><input type="radio" name="q99" value="C"> C. ព្រះពុទ្ធសាមណៈគោតម</label>
+            </div>
+            <div class="explanation" id="exp-q99"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០០. តើវិមានឈ្នះឈ្នះ សាងសង់នៅឯណា?</div>
+            <div class="options">
+                <label><input type="radio" name="q100" value="A"> A. សង្កាត់ព្រែកតាសេក ខណ្ឌជ្រោយចង្វារ រាជធានីភ្នំពេញ</label>
+                <label><input type="radio" name="q100" value="B"> B. ជិតវិមានឯករាជ្យ ខណ្ឌដូនពេញ រាជធានីភ្នំពេញ</label>
+                <label><input type="radio" name="q100" value="C"> C. ក្រុងតាខ្មៅ ខេត្តកណ្តាល</label>
+            </div>
+            <div class="explanation" id="exp-q100"></div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">១០១. ការកើតមានសេចក្តីលោភៈ ទោសៈ មោហៈ និងនាំទៅរក សេចក្តីទុក្ខ សេចក្ដីវិនាស។
+                នេះជាទ្រឹស្តីរបស់ ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q101" value="A"> A. ព្រះពុទ្ធ</label>
+                <label><input type="radio" name="q101" value="B"> B. ព្រះអាឡោះ</label>
+                <label><input type="radio" name="q101" value="C"> C. ព្រះយេស៊ូ</label>
+            </div>
+            <div class="explanation" id="exp-q101"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០២. អាកប្បកិរិយារបស់បុគ្គលម្នាក់ ដែលមិនទទួលឥទ្ធិពល ឬបទ បញ្ជាពីអ្នកណាម្នាក់
+                ហើយមានសិទ្ធិសេរីភាពក្នុងការសម្រេចធ្វើ អ្វីមួយគេហៅថាមនុស្សមាន ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q102" value="A"> A. ភាពទន់ខ្សោយ</label>
+                <label><input type="radio" name="q102" value="B"> B. ឯករាជ្យភាព</label>
+                <label><input type="radio" name="q102" value="C"> C. ភាពអសកម្ម</label>
+            </div>
+            <div class="explanation" id="exp-q102"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៣. ការមានចិត្តស្រឡាញ់រាប់អានចង់ឱ្យគេបានសុខហៅថា ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q103" value="A"> A. មេត្តា</label>
+                <label><input type="radio" name="q103" value="B"> B. ករុណា</label>
+                <label><input type="radio" name="q103" value="C"> C. មុទិតា</label>
+            </div>
+            <div class="explanation" id="exp-q103"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៤. ការមានចិត្តអាណិតអាសូរដោយគ្មានច្រណែនឈ្នានីសគឺ ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q104" value="A"> A. មេត្តា</label>
+                <label><input type="radio" name="q104" value="B"> B. ករុណា</label>
+                <label><input type="radio" name="q104" value="C"> C. ឧបេក្ខា</label>
+            </div>
+            <div class="explanation" id="exp-q104"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៥. ការអបអរសាទរចំពោះសេចក្តីសុខរបស់អ្នកដទៃហៅថា ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q105" value="A"> A. មុទិតា</label>
+                <label><input type="radio" name="q105" value="B"> B. ឧបេក្ខា</label>
+                <label><input type="radio" name="q105" value="C"> C. មេត្តា</label>
+            </div>
+            <div class="explanation" id="exp-q105"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៦. ការតាំងចិត្តជាកណ្តាលប្រកាន់ចិត្តអព្យាក្រឹត្យឥតលំអៀង ហៅថា ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q106" value="A"> A. ករុណា</label>
+                <label><input type="radio" name="q106" value="B"> B. មុទិតា</label>
+                <label><input type="radio" name="q106" value="C"> C. ឧបេក្ខា</label>
+            </div>
+            <div class="explanation" id="exp-q106"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៧. ការចេះដឹងគុណ និងទទួលស្គាល់គុណបំណាច់ដ៏ធំធេងរបស់ បុព្វការីជនមានមាតាបិតាជាដើម
+                ដែលបានធ្វើចំពោះបុត្រធីតា ហៅថា ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q107" value="A"> A. កតញ្ញូតាធម៌</label>
+                <label><input type="radio" name="q107" value="B"> B. សហប្រតិបត្តិការ</label>
+                <label><input type="radio" name="q107" value="C"> C. សាមគ្គីធម៌</label>
+            </div>
+            <div class="explanation" id="exp-q107"></div>
+        </div>
+        
+        <div class="push-block">
+            <div class="question-title">១០៨. ការបង្ហាញភាពស្មោះត្រង់គ្មានការលាក់លៀម ដោយហ៊ាន និយាយជាជំហរពីកំហុសរបស់ខ្លួនហៅថា ៖
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q108" value="A"> A. គណនេយ្យភាព</label>
+                <label><input type="radio" name="q108" value="B"> B. តម្លាភាព</label>
+                <label><input type="radio" name="q108" value="C"> C. សមធម៌</label>
+            </div>
+            <div class="explanation" id="exp-q108"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១០៩. ការបួសជាព្រះសង្ឃនៅក្នុងព្រះពុទ្ធសាសនាត្រូវសិក្សាតាម ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q109" value="A"> A. គម្ពីរព្រះត្រៃបិដក</label>
+                <label><input type="radio" name="q109" value="B"> B. គម្ពីរវេទសាស្ត្រ</label>
+                <label><input type="radio" name="q109" value="C"> C. គម្ពីរបទានុក្រម</label>
+            </div>
+            <div class="explanation" id="exp-q109"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១១០. តើប្រជាពលរដ្ឋទាំងពីរភេទមានអាយុប៉ុន្មានឆ្នាំ
+                សិទ្ធិឈរឈ្មោះឲ្យគេបោះឆ្នោតធ្វើតំណាងរាស្ត្រ ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q110" value="A"> A. ១៨ ឆ្នាំឡើង</label>
+                <label><input type="radio" name="q110" value="B"> B. ២៥ ឆ្នាំឡើង</label>
+                <label><input type="radio" name="q110" value="C"> C. ៣០ ឆ្នាំឡើង</label>
+            </div>
+            <div class="explanation" id="exp-q110"></div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-title">១១១. នៅពេលមានប៉ូលីសត្រូវចាប់ខ្លួននរណាម្នាក់អ្នកនោះត្រូវ ៖</div>
+            <div class="options">
+                <label><input type="radio" name="q111" value="A"> A. រត់គេចខ្លួន</label>
+                <label><input type="radio" name="q111" value="B"> B. តតាំងត្រឡប់ទៅវិញ</label>
+                <label><input type="radio" name="q111" value="C"> C. សុំមើលដីកា</label>
+            </div>
+            <div class="explanation" id="exp-q111"></div>
+        </div>
+    
+        <button type="button" id="submitBtn" onclick="checkAnswers(true)">ផ្ទៀងផ្ទាត់លទ្ធផលទាំងអស់</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    let timeLeft = 2700;
+        let timerInterval;
+        let isSubmitted = false;
+
+
+        const fullAnswersText = {
+            q1: "<strong>ចម្លើយពេញ៖</strong> លំដាប់ខែចន្ទគតិខ្មែរគឺ៖ មិគសិរ បុស្ស មាឃ ផល្គុន ចេត្រ ពិសាខ ជេស្ឋ អាសាឍ ស្រាពណ៍ ភទ្របទ អស្សុជ កត្តិក។",
+            q2: "<strong>ចម្លើយពេញ៖</strong> អគតិ (សេចក្តីលម្អៀង) មាន ៤ ប្រការគឺ៖ ឆន្ទាគតិ (លម្អៀងព្រោះស្រឡាញ់), ទោសាគតិ (លម្អៀងព្រោះខឹង), មោហាគតិ (លម្អៀងព្រោះអវិជ្ជា/ល្ងង់), ភយាគតិ (លម្អៀងព្រោះខ្លាច)។",
+            q3: "<strong>ចម្លើយពេញ៖</strong> ប្រភេទមនុស្សតាមពុទ្ធសាសនាមាន ៥ ប្រភេទគឺ៖ មនុស្សនេរយិកោ (មនុស្សនរក), មនុស្សបេតោ (មនុស្សប្រេត), មនុស្សតិរច្ឆានោ (មនុស្សតិរច្ឆាន), មនុស្សមនុស្សោ (មនុស្សពិតៗ), មនុស្សទេវោ (មនុស្សទេវៈ)។",
+            q4: "<strong>ចម្លើយពេញ៖</strong> ពណ៌ខៀវ តំណាងឱ្យ ព្រះនិលកេសា (ព្រះកេសពណ៌ខៀវ) ឬរស្មីពណ៌ខៀវ ដែលបញ្ចេញពីព្រះកាយព្រះសម្មាសម្ពុទ្ធ។",
+            q5: "<strong>ចម្លើយពេញ៖</strong> ផលប្រយោជន៍នយោបាយ និងសន្តិសុខ៖ កម្ពុជាលែងព្រួយបារម្ភរឿងគំរាមកំហែងសន្តិសុខ, អាចដោះស្រាយបញ្ហាដោយសន្តិវិធី, និងមានមុខមាត់ស្មើភាពលើឆាកអន្តរជាតិដោយលែងដាច់ឯកោ។",
+            q6: "<strong>ចម្លើយពេញ៖</strong> ធម៌អហិង្សា ជាធម៌ទ្រទ្រង់មនុស្សមិនឱ្យប្រព្រឹត្តអំពើហិង្សា មិនបៀតបៀនអ្នកដទៃទាំងកាយនិងចិត្ត។ ផលប្រយោជន៍៖ បុគ្គលអាចយកឈ្នះចិត្តខ្លួនឯង រស់នៅគ្មានសត្រូវ គ្រួសារមានសុភមង្គល រីឯសង្គមគ្មានជម្លោះដណ្ដើមអំណាច គោរពតម្លៃជីវិតគ្នា បង្កើតបាននូវវប្បធម៌អហិង្សា។",
+            q7: "<strong>ចម្លើយពេញ៖</strong> សិទ្ធិនយោបាយ សំដៅលើការចូលរួមក្នុងឆាកនយោបាយ កិច្ចការសង្គម និងកំណត់ជោគវាសនាប្រទេសជាតិ។ រួមមាន៖ សិទ្ធិចូលរួមបោះឆ្នោតនិងឈរឈ្មោះឱ្យគេបោះឆ្នោត, សិទ្ធិបញ្ចេញមតិ (ទិតៀន កែលម្អ ស្ថាបនា), សិទ្ធិបង្កើតគណបក្សនយោបាយ, សិទ្ធិបង្កើតអង្គការសហជីពឬសមាគម, សិទ្ធិធ្វើកូដកម្ម បាតុកម្មអហិង្សា និងសិទ្ធិចូលរួមប្រជុំដោយសេរី។",
+            q8: "<strong>ចម្លើយពេញ៖</strong> ចម្លាក់បុរាណខ្មែរមានបីប្រភេទគឺ៖ <br>- <strong>ចម្លាក់លិប (រាក់)៖</strong> ឆ្លាក់លូកចូលផ្ទៃថ្ម មើលទៅមិនសូវផុសខ្លាំង。<br>- <strong>ចម្លាក់លៀន៖</strong> ឆ្លាក់លៀនចេញខ្ពស់ពីផ្ទៃថ្ម មើលទៅរូបចម្លាក់ដូចផុស។<br>- <strong>ចម្លាក់លោត៖</strong> ឆ្លាក់រូបសត្វ ឬមនុស្សដាច់ពីជញ្ជាំង ប៉ុន្តែផ្នែកខ្លះជាប់នឹងជញ្ជាំងដើម្បីទប់កុំឱ្យរលំ (រូបបដិមា)។",
+            q9: "<strong>ចម្លើយពេញ៖</strong> ទស្សនៈប្រាសាទអង្គរវត្តបែរមុខទៅទិសខាងលិច៖ <br>១. បើបែរទៅទិសខាងកើតគឺជិតស្ទឹងសៀមរាប នាំឱ្យគ្មានកន្លែងប្រារព្ធពិធីបុណ្យ។<br>២. បើបែរទៅទិសខាងកើត ហាក់ដូចជាបែរខ្នងដាក់ប្រាសាទសំខាន់ៗឯទៀត។<br>៣. ពីព្រោះប្រាសាទនេះជាប្រាសាទផ្នូររបស់ ព្រះបាទសុរិយាវរ្ម័នទី២។",
+            q10: "<strong>ចម្លើយពេញ៖</strong> មនុស្សគ្រប់រូបត្រូវប្រតិបត្តិ៖ គោរពស្រឡាញ់ យោគយល់ និងគោរពសិទ្ធិគ្នាទៅវិញទៅមក, ទទួលខុសត្រូវរាល់ទង្វើខ្លួន, ប្រកាន់ខ្ជាប់វិន័យ ក្រមសីលធម៌ និងច្បាប់សង្គម, មិនប្រើអំណាចគាបសង្កត់អ្នកដទៃ, វៀរចាកអំពើអបាយមុខនិងគ្រឿងញៀន, មិនជឿពាក្យញុះញង់ និងប្រកបរបរសុចរិត។",
+            q11: "<strong>ចម្លើយពេញ៖</strong> អំពើហិង្សាសំដៅយកការរំលោភបំពានផ្លូវកាយ ផ្លូវចិត្ត ផ្លូវភេទ និងផ្លូវសេដ្ឋកិច្ច រួមទាំងការប្រមាថ គំរាមកំហែង និងដាក់ឱ្យនៅឯកោ។ វិធានការទប់ស្កាត់៖ ផ្សព្វផ្សាយច្បាប់, ដាក់ទណ្ឌកម្មអ្នកប្រើហិង្សា, តុលាការធ្វើអន្តរាគមន៍ការពារជនរងគ្រោះជាបន្ទាន់ និងផ្ដើមជំនួយធានាសុវត្ថិភាពដល់ពួកគេ។",
+            q12: "<strong>ចម្លើយពេញ៖</strong> មូលហេតុព្រះបាទពញាយ៉ាតចាកចោលក្រុងអង្គរ៖ <br>- <strong>កត្តាប្រជាជន៖</strong> សៀមកៀរនិងសម្លាប់ប្រជាជនអស់ច្រើន មិនអាចការពារក្រុងបានតទៅទៀត។<br>- <strong>កត្តាសេដ្ឋកិច្ច៖</strong> សង្គ្រាមបំផ្លាញប្រព័ន្ធធារាសាស្ត្រ បារាយណ៍ ផ្លូវថ្នល់ ខ្ទេចខ្ទីមិនអាចស្តារបាន។<br>- <strong>កត្តាភូមិសាស្ត្រ៖</strong> ជិតក្រុងអយុធ្យាពេក (៤០០គីឡូម៉ែត្រ) ងាយរងការវាយលុកម្តងទៀត។<br>- <strong>កត្តាឥទ្ធិពល៖</strong> ខ្មែរចុះខ្សោយកម្លាំងកាយនិងស្មារតី រីឯសៀមកំពុងពង្រីកអំណាច។",
+            q13: "<strong>ចម្លើយពេញ៖</strong> កម្ពុជាបានចូលជាសមាជិកពេញសិទ្ធិនៃសមាគមអាស៊ាន (ASEAN) នៅថ្ងៃទី ៣០ ខែ មេសា ឆ្នាំ ១៩៩៩។",
+            q14: "<strong>ចម្លើយពេញ៖</strong> អត្ថន័យទង់អាស៊ាន៖ ពណ៌ខៀវ(សន្តិភាព ស្ថេរភាព), ក្រហម(ក្លាហាន ស្វាហាប់), ស(បរិសុទ្ធ), លឿង(វិបុលភាព)។ ដើមស្រូវទាំង១០ តំណាងឱ្យសុបិនរបស់បិតាបង្កើតអាស៊ាន ដែលចង់ប្រមូលផ្ដុំប្រទេសទាំង១០នៅអាស៊ីអាគ្នេយ៍ឱ្យក្លាយជាសមាគមប្រកបដោយមិត្តភាព និងសាមគ្គីភាព។ រង្វង់ព័ទ្ធជុំវិញតំណាងឱ្យភាពឯកភាពគ្នា។",
+            q15: "<strong>ចម្លើយពេញ៖</strong> ចាត់ទុកទេសចរណ៍ជាឧស្សាហកម្មគ្មានផ្សែង ព្រោះវាបង្កើតការងារច្រើនសន្ធឹកសន្ធាប់ដល់ប្រជាជន (សណ្ឋាគារ ដឹកជញ្ជូន ភោជនីយដ្ឋាន ការលក់ដូរវត្ថុអនុស្សាវរីយ៍ មគ្គុទ្ទេសក៍) និងជំរុញកសិកម្ម សិប្បកម្ម ឱ្យមានចំណូលដូចវិស័យឧស្សាហកម្មដែរ តែមិនបញ្ចេញផ្សែងពុលពីរោងចក្រឡើយ។",
+            q16: "<strong>ចម្លើយពេញ៖</strong> គេចែកសិល្បៈខ្មែរជា ៧ ទម្រង់គឺ៖ សិល្បៈស្ថាបត្យកម្ម, សិល្បៈចម្លាក់, សិល្បៈគំនូរ, សិល្បៈតន្ត្រី, សិល្បៈរបាំ, សិល្បៈអក្សរសិល្ប៍, និងសិល្បៈភាពយន្ត។",
+            q17: "<strong>ចម្លើយពេញ៖</strong> លក្ខខណ្ឌទូទៅសុំចូលសញ្ជាតិខ្មែរ៖ 有លិខិតបញ្ជាក់គំនិតមារយាទនិងសីលធម៌ល្អពីមេឃុំ/ចៅសង្កាត់, គ្មានទោសព្រហ្មទណ្ឌ, រស់នៅស្របច្បាប់ជាប់ចំនួន ៧ ឆ្នាំ, ចេះនិយាយនិងសរសេរភាសាខ្មែរ យល់ដឹងប្រវត្តិសាស្ត្រខ្មែរខ្លះៗ, មានបញ្ញានិងកាយសម្បទាល្អមិនជាបន្ទុកដល់ជាតិ។",
+            q18: "<strong>ចម្លើយពេញ៖</strong> សេរីភាពជាអំណាចដែលអាចធ្វើអ្វីបានតាមអំពើចិត្ត ប៉ុន្តែស្ថិតក្រោមច្បាប់។ ប្រភេទសេរីភាពមាន៖ សេរីភាពធម្មជាតិ (តាមឆន្ទៈគ្មានការបង្ខិតបង្ខំ), សេរីភាពពលរដ្ឋ (ធ្វើអ្វីៗតាមច្បាប់អនុញ្ញាតដោយស្មើភាព), សេរីភាពនយោបាយ (ចូលរួមធ្វើនយោបាយ), សេរីភាពសេដ្ឋកិច្ច (ប្រកបវិជ្ជាជីវៈតាមចំណូលចិត្ត)។ បើប្រើហួសច្បាប់នឹងនាំឱ្យមានអនាធិបតេយ្យ និងអស្ថិរភាព។",
+            q19: "<strong>ចម្លើយពេញ៖</strong> ជំនួញខុសធម៌ទាំង ៥ ប្រការ (មិច្ឆាពាណិជ្ជា) ដែលព្រះពុទ្ធទ្រង់ហាមប្រាមគឺ៖ ១. ជំនួញសាស្ត្រាវុធ, ២. ជំនួញមនុស្ស, ៣. ជំនួញសត្វដែលគេពិឃាតយកសាច់, ៤. ជំនួញទឹកស្រវឹង, ៥. ជំនួញថ្នាំពុល។",
+            q20: "<strong>ចម្លើយពេញ៖</strong> សីលធម៌ ជាធម៌ដឹកនាំមនុស្សឱ្យប្រព្រឹត្តល្អ ចៀសវាងអំពើអាក្រក់។ ចែកជា ៥ យ៉ាង៖ ១.សីលធម៌ផ្ទាល់ខ្លួន, ២.សីលធម៌ក្នុងគ្រួសារ, ៣.សីលធម៌ក្នុងសង្គម, ៤.សីលធម៌ពិភពលោក, ៥.សីលធម៌វិជ្ជាជីវៈ។",
+            q21: "<strong>ចម្លើយពេញ៖</strong> ពាក្យ “នាគ” មានន័យថា ប្រសើរចម្បង នាគសំដៅបុគ្គលបុថុជ្ជនណាម្នាក់ដែលកើតមានសេចក្តីបរិសុទ្ធ អៀនខ្មាស ខ្លាចបាប ហើយមានចិត្តជ្រះថ្លាទៅសូមជួសក្នុងសំណាក់ព្រះពុទ្ធសាសនា។ កុលបុត្រទាំងឡាយណាដែលបម្រុងខ្លួនចូលទៅសាងផ្នួសជាសាមណេរនៅក្នុងព្រះពុទ្ធសាសនា ត្រូវបានទទួលនាមថាជា 'នាគ'។ ការរៀបចំដង្ហែមានការរៀបចំបាយសីធំមួយធ្វើអំពីដើមចេកមាន ១៥ ឬ ៩ ថ្នាក់ រុំព័ទ្ធដោយធាងចេក និងមានសំពត់ហូលរុំពីក្រៅមួយជាន់ទៀត។ គេរៀបចំក្បួនដង្ហែនាគចេញទៅវត្តនៅពេលព្រឹកព្រលឹមដោយមានភ្លេងឆៃយ៉ាំ ឬភ្លេងពិណពាទ្យកំដរផង នាគជិះសេះ ឬគោ និងមានអ្នកបាំងឆត្រឱ្យ ព្រមទាំងហែហមដោយម្ដាយទូលត្រៃចីវរ ឪពុកស្ពាយបាត្រ។ ក្បូនដង្ហែត្រូវប្រទក្សិណជុំវិញព្រះវិហារបីជុំ ទើបហែចូល ដើម្បីសម្ដែងសេចក្តីត្រេកអរ រួចបន្តទៅទៀតនាគនេះនឹងត្រូវបំបួសជាសាមណេរ។",
+
+            q22: "<strong>ចម្លើយពេញ៖</strong> នៅថ្ងៃទី១១ ខែមីនា ឆ្នាំ២០១៩ ក្រសួងអប់រំ យុវជន និងកីឡា បានប្រារព្ធទិវាជាតិអំណាន ក្រោមប្រធានបទ ការអានបណ្តុះវប្បធម៌ការសិក្សាពេញមួយជីវិត",
+
+            q23: "<strong>ចម្លើយពេញ៖</strong> អាពាហ៍ពិពាហ៍ជាការផ្សំផ្គុំយ៉ាងឱឡារិកជាផ្លូវការ រវាងបុរសម្នាក់និងស្ត្រីម្នាក់ដែលប្ដេជ្ញាថានឹងរួមរស់នៅជាមួយគ្នាតាមបញ្ញត្តិច្បាប់ ហើយភាគីទាំងពីរមិនអាចរំលាយទៅវិញតាមទំនើងចិត្តបានឡើយ។ លក្ខខណ្ឌដែលបុគ្គលមិនអាចរៀបអាពាហ៍ពិពាហ៍ស្របច្បាប់បានមាន៖ ១. បុគ្គលមានភេទដូចគ្នា, ២. បុគ្គលមានជំងឺឃ្លង់ របេង កាមរោគដែលមិនទាន់ព្យាបាលដាច់ ជាពិសេសជំងឺមហារីក និងជំងឺអេដស៍, ៣. ជនវិកលចរិត ឬជនមិនដឹងខុសត្រូវ, ៤. បុគ្គលដែលជាប់ចំណងញាតិពន្ធលោហិត ឬញាតិពន្ធក្នុងខ្សែផ្ទាល់គ្រប់ថ្នាក់ (ទោះមានខាន់ស្លាក្ដី ឥតខាន់ស្លាក្ដី ឬសាច់ចិញ្ចឹមក្តី), ៥. បុគ្គលមានចំណងអាពាហ៍ពិពាហ៍ពីមុនមិនទាន់រលាយ (មានប្តីឬប្រពន្ធរួចហើយ)។",
+            q24: "<strong>ចម្លើយពេញ៖</strong> ក. មនុស្សនៅតែផឹកនិងជក់ព្រោះ៖ មានការបង្ខំពីមិត្តភក្តិ, យកតម្រាប់តាមមនុស្សចាស់, កែអផ្សុក, កាត់បន្ថយការពិបាកចិត្ត, ការផ្សាយពាណិជ្ជកម្មញុះញង់, ចង់សាកចង់ភ្លក់រសជាតិ។ ខ. ផលអាក្រក់៖ ចំពោះអ្នកប្រព្រឹត្ត៖ បំផ្លាញសុខភាព កើតជំងឺក្រពះ ពោះវៀន ថ្លើម បេះដូង មហារីកសួត ដាច់សរសៃឈាមខួរក្បាល ឆាប់ស្លាប់មុនអាយុ។ ចំពោះគ្រួសារនិងសង្គម៖ បង្កគ្រោះថ្នាក់ចរាចរណ៍ អំពើហិង្សាក្នុងគ្រួសារ ជម្លោះបែកបាក់ ជួបភាពក្រីក្រ ខាតបង់ប្រាក់កាសទិញនិងព្យាបាល បោះបង់ការងារ/ការសិក្សា បន្សល់ទុកក្មេងកំព្រា ស្ត្រីមេម៉ាយ និងធ្វើឱ្យសង្គមគ្មានការរីកចម្រើន មានអំពើអនាធិបតេយ្យ。 គ. អ្នកជក់បារីដោយប្រយោល៖ សំដៅលើអ្នកដែលមិនជក់ តែស្រូបផ្សែងបារីពីគេក្នុងបរិយាកាស (កុមារ ស្រ្តីមានផ្ទៃពោះ ទារក)។ ពួកគេរងផលប៉ះពាល់ខ្លាំងដូចអ្នកជក់ផ្ទាល់៖ រយៈពេលខ្លី៖ ហៀរទឹកភ្នែក ហៀរសំបោរ ឈឺបំពង់ក ក្អក ឈឺក្បាល។ រយៈពេលវែង៖ បង្កើនគ្រោះថ្នាក់ជំងឺមហារីកសួត គាំងបេះដូង ខូចមុខងារសួត និងធ្វើឱ្យអ្នកមានជំងឺហឺត បេះដូង រលាកទងសួត មានសភាពធ្ងន់ធ្ងរខ្លាំង។",
+            q25: "<strong>ចម្លើយពេញ៖</strong> ដើម្បីឱ្យមានសាមគ្គីរឹងមាំ គេត្រូវប្រកាន់យកវិធី ៦ យ៉ាងគឺ៖ <br>១. ការតស៊ូ និងការអត់ធ្មត់៖ ព្យាយាមតស៊ូយកជ័យជម្នះដើម្បីសម្រេចការងារជាប្រយោជន៍រួម និងមានការតាំងចិត្តមុតមាំទោះមានឧបសគ្គ។<br>២. ការសន្តោស និងការស្មោះត្រង់៖ ទទួលដោយរីករាយនូវផលដែលបានមកដោយធម៌ និងមិនត្រូវមានចិត្តរើសអើងចំពោះមនុស្សផងគ្នា។<br>៣. ការមិនប្រកាន់ ឬមិនរើសអើង៖ មិនរើសអើងគ្នាដែលនាំឱ្យមានការថ្នាំងថ្នាក់ក្នុងចិត្តអ្នកដទៃ។<br>៤. ការមិនច្រណែននិន្ទាឈ្នានីស៖ មិនត្រូវមានចិត្តចង្អៀតចង្អល់ មានឧបាយកលបំផ្លិចបំផ្លាញអ្នកដទៃឱ្យវិនាសឬមានទុក្ខ។<br>៥. ការស្មោះត្រង់ទៅវិញទៅមក៖ រួមសុខរួមទុក្ខជាមួយគ្នាក្នុងការស្វែងរកប្រយោជន៍ ឬសេចក្តីសុខ ទោះក្នុងស្ថានភាពលំបាកយ៉ាងណា។<br>៦. ការពិចារណារកហេតុផលក្នុងផ្លូវល្អ៖ កាលបើមានហេតុការណ៍ណាមួយកើតឡើង ត្រូវត្រិះរិះពិនិត្យឱ្យបានល្អិតល្អន់ និងរកវិធីដោះស្រាយមួយដ៏សមស្រប។",
+            q26: "<strong>ចម្លើយពេញ៖</strong> រដ្ឋធម្មនុញ្ញ គឺជាច្បាប់កំពូលរបស់ជាតិ ឬជាគោលនយោបាយសាធារណៈកំពូលនៅក្នុងប្រទេសដែលមនុស្សគ្រប់រូបត្រូវតែគោរពតាម។ ផលប្រយោជន៍៖ ធានាឱ្យមានស្ថិរភាពសង្គម និងមានតុល្យភាពរវាងអំណាចទាំងបី (នីតិប្បញ្ញត្តិ នីតិប្រតិបត្តិ អំណាចតុលាការ), ធានាឱ្យកម្ពុជារដ្ឋមិនអាចបំបែកបាន, ពលរដ្ឋមានភាពស្មើគ្នាចំពោះមុខច្បាប់, ធានាសិទ្ធិឯកជន សិទ្ធិជំនឿសាសនា នយោបាយ និងការបង្កើតសមាគម, ធានាកម្មសិទ្ធិឯកជន, ធានាអាយុជីវិតពលរដ្ឋដោយគ្មានការកាត់ទោសប្រហារជីវិត, ផ្តល់សិទ្ធិបោះឆ្នោតសកល និងជាប្រទីបដឹកនាំប្រទេសជាតិឱ្យមានការអភិវឌ្ឍជឿនលឿន (ច្បាប់ទាំងឡាយត្រូវតែស្របនឹងរដ្ឋធម្មនុញ្ញ)។",
+            q27: "<strong>ចម្លើយពេញ៖</strong> បុព្វបុរសខ្មែរកសាងប្រាសាទច្រើនព្រោះ៖ <br>- <b>បុព្វហេតុសាសនា៖</b> ការប្រកាន់ជំនឿសាសនាខុសៗគ្នានៃស្តេចជំនាន់មុន ពុំព្រមបូជាប្រាសាទដដែលៗ ត្រូវសង់ប្រាសាទថ្មីដើម្បីឧទ្ទិសថ្វាយអាទិទេព ឬអ្នកមានគុណ។<br>- <b>បុព្វហេតុកិត្តិយស៖</b> បង្ហាញពីភាពប៉ិនប្រសប់ ប្រាជ្ញាឈ្លាសវៃ និងផ្សព្វផ្សាយនូវតេជៈបារមីរបស់ព្រះរាជាដល់ប្រជារាស្ត្រនិងបរទេស។<br>- <b>បុព្វហេតុសង្គ្រាម៖</b> សង់ឱ្យច្រើន ធំទូលាយ រឹងមាំ មានច្រកខ្វាត់ខ្វែង ដើម្បីជាមធ្យោបាយទប់ទល់ និងវាយប្រហារសត្រូវដែលមិនស្គាល់ភូមិសាស្ត្រ។<br>- <b>បុព្វហេតុប្រវត្តិសាស្ត្រ៖</b> ដើម្បីទុកកិត្តិយសរបស់ព្រះអង្គឱ្យល្បីខ្ទរខ្ទារនៅក្នុងប្រវត្តិសាស្ត្រមនុស្សគ្រប់ជំនាន់ដឹងឮ។<br>- <b>បុព្វហេតុទម្លាប់៖</b> ពេលឡើងសោយរាជ្យ តែងសង់ប្រាសាទបន្តពីស្តេចមុនៗទុកជាកេរមរតកក្នុងរជ្ជកាលខ្លួន។<br>- <b>បុព្វហេតុផ្លាស់ប្ដូរទីក្រុង៖</b> ពេលប្តូររាជធានីថ្មី ត្រូវសង់ប្រាសាទថ្មីនៅទីនោះជានិច្ចដើម្បីគោរពបូជា។<br>* ផលប្រយោជន៍ដល់សេដ្ឋកិច្ច៖ ជាប្រភពចំណូលថវិកាជាតិ, បង្ខិតបង្កើតការងារជូនប្រជាជន (លក់វត្ថុអនុស្សាវរីយ៍, សេវាកម្មសណ្ឋាគារ, ដឹកជញ្ជូន) និងផ្សព្វផ្សាយកិត្តិនាមខ្មែរលើឆាកអន្តរជាតិ។ ក្នុងនាមជាកូនខ្មែរត្រូវ៖ សិក្សាស្គាល់ឱ្យច្បាស់ពីតម្លៃនិងអត្ថន័យ, លើកកម្ពស់ស្នាដៃស្ថាបត្យកម្ម, ចូលរួមថែរក្សា អភិរក្ស និងទប់ស្កាត់ការលួចប្លន់បំផ្លិចបំផ្លាញ។",
+            q28: "<strong>ចម្លើយពេញ៖</strong> វិស័យទេសចរណ៍នៅកម្ពុជាចែកចេញជា ៥ ប្រភេទគឺ៖<br>១. ទេសចរណ៍វប្បធម៌៖ ទស្សនាតាមតំបន់ប្រាសាទបុរាណ បូជនីយដ្ឋាន អារាម ដើម្បីយល់ដឹងពីជំនឿ សាសនា ប្រពៃណី ទំនៀមទម្លាប់ របបរបរស់នៅ របាំ...។<br>២. ទេសចរណ៍ធម្មជាតិ៖ កម្សាន្តសម្រស់ធម្មជាតិ សិក្សាបរិស្ថាន សត្វព្រៃ មច្ឆជាតិ រុក្ខជាតិ និងជនជាតិដើមភាគតិច។<br>៣. ទេសចរណ៍អរូបី៖ ដំណើរកម្សាន្តពាក់ព័ន្ធនឹងសាសនា ការគោរពអ្នកតា អច្ឆរិយភាពផ្សេងៗ។<br>៤. ទេសចរណ៍កែច្នៃ៖ កម្សាន្តតាមរមណីយដ្ឋានដែលកែច្នៃថ្មី កន្លែងកម្សាន្ត មណ្ឌលកីឡា ឆ្នេរសមុទ្រ ជ្រលងភ្នំ។<br>៥. ទេសចរណ៍ជំនួញ៖ ដំណើរកម្សាន្តរបស់វិនិយោគិនបរទេសដើម្បីស្វែងរកទីតាំងបណ្តាក់ទុន。<br>* ផលប្រយោជន៍៖ បង្កើតមុខរបរជូនពលរដ្ឋ, បង្កើនសេដ្ឋកិច្ចគ្រួសារ, ទាក់ទាញរូបិយប័ណ្ណបរទេស, ពង្រឹងខឿនសេដ្ឋកិច្ចជាតិនិងរក្សាស្ថេរភាពប្រាក់រៀល, អភិវឌ្ឍហេដ្ឋារចនាសម្ព័ន្ធ (ផ្លូវ ស្ពាន), និងបង្កើនចំណងសាមគ្គីភាព ភាតរភាព មនុស្សធម៌អន្តរជាតិ។",
+            q29: "<strong>ចម្លើយពេញ៖</strong> បុព្វបុរសខ្មែរតែងប្រៀនប្រដៅយើងឱ្យចាប់អារម្មណ៍និងដឹងគុណលើ គុណ ៦ យ៉ាងគឺ៖<br>១. គុណឪពុក៖ រួមមានឪពុកបង្កើត ឪពុកក្មេក ឪពុកចិញ្ចឹម និងអាណាព្យាបាលប្រុស។<br>២. គុណម្តាយ៖ រួមមានម្តាយបង្កើត ម្តាយក្មេក ម្តាយចិញ្ចឹម និងអាណាព្យាបាលស្រី។<br>៣. គុណបង/អ្នកដឹកនាំ៖ គុណបងបង្កបង្កើត និងគុណព្រះមហាក្សត្រ ថ្នាក់ដឹកនាំដែលគង់ប្រថាប់ការពារ ឃុំគ្រងរក្សាយើង។<br>៤. គុណគ្រូបាធ្យាយ៖ ជាគុណដែលបានផ្តល់ចំណេះដឹង ជំនាញ សព្វសារពើដល់យើង។<br>៥. គុណញាតិមិត្ត៖ អ្នកជិតឆ្ងាយភូមិផងរបងជាមួយ ដែលធ្លាប់ជួយយើងក្នុងគ្រាមានអាសន្នអន់ក្រ។<br>៦. គុណព្រះរតនត្រ័យ៖ ដែលបានផ្ដោតនូវការអប់រំ វិន័យ ទូន្មានបង្ខំចិត្តឱ្យយើងបានក្លាយជាមនុស្សប្រសើរក្នុងសង្គម។",
+            q30: "<strong>ចម្លើយពេញ៖</strong> បានជាគេថា 'ទឹកគឺជាជីវិត' ព្រោះទឹកមានតួនាទីសំខាន់ដាច់ខាតមិនអាចខ្វះបាន៖ មនុស្សនិងសត្វត្រូវការទឹកជាចាំបាច់សម្រាប់បរិភោគនិងផឹកដើម្បីរស់ (ខ្វះតែ ១-២ ថ្ងៃនឹងស្លាប់ ដោយមនុស្សម្នាក់ត្រូវការទឹកយ៉ាងតិច ២ លីតក្នុងមួយថ្ងៃ)។ ទឹកប្រើសម្រាប់ចម្អិនអាហារ ងូតសម្អាតកាយ បោកគក់សម្លៀកបំពាក់ សម្អាតផ្ទះសម្បែង និងប្រព័ន្ធអនាម័យបង្គន់។ ជាងនេះទៅទៀត ទឹកមានសារៈសំខាន់ខ្លាំងក្នុងវិស័យកសិកម្ម សម្រាប់ស្រោចស្រពដំណាំដាំដុះ និងស្រែចម្ការ បង្កើតតំបន់បៃតងធ្វើឱ្យបរិស្ថានស្រស់ស្រាយ និងបរិយាកាសស្រស់ថ្លា។ សរុបមក មានទឹក ទើបធ្វើឱ្យមនុស្ស សត្វ និងរុក្ខជាតិ អាចរស់រានមានជីវិត និងលូតលាស់ទៅមុខបាន។",
+            q31: "<strong>ចម្លើយពេញ៖</strong> មីនដែលប្រើប្រាស់នៅកម្ពុជាមានពីរប្រភេទ គឺមីនប្រឆាំងមនុស្ស និងមីនប្រឆាំងរថក្រោះ។",
+            q32: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទអង្គរវត្តមានជើងសសរសរុប ១៥៣២ដើម។",
+            q33: "<strong>ចម្លើយពេញ៖</strong> គ្រូបង្រៀនមានភារកិច្ច ៥ យ៉ាង គឺ៖ ត្រៀមមុនពេលបង្រៀន, ដឹកនាំការបង្រៀនឱ្យបានល្អ, លើកទឹកចិត្តសិស្ស, វាយតម្លៃកិច្ចការសិស្សដោយសុក្រឹតភាពនិងតម្លាភាព និងស្វ័យសិក្សាពេញមួយជីវិត។",
+            q34: "<strong>ចម្លើយពេញ៖</strong> លោកតាក្រមង៉ុយប្រសូត្រនៅឆ្នាំ១៨៦៥ និងទទួលអនិច្ចកម្មនៅឆ្នាំ១៩៣៦ ក្នុងវ័យ៧១ឆ្នាំ។",
+            q35: "<strong>ចម្លើយពេញ៖</strong> សិល្បៈខ្មែរចែកចេញជា ៧ ទម្រង់គឺ៖ សិល្បៈស្ថាបត្យកម្ម(សំណង់), សិល្បៈចម្លាក់(សូនរូប ដាប់ ឆ្លាក់), សិល្បៈគំនូរ(វិចិត្រកម្ម), សិល្បៈតន្ត្រីចម្រៀង(សូរសំឡេង), សិល្បៈរបាំ(កាយវិការ), សិល្បៈអក្សរសិល្ប៍កំណាព្យ(ពាក្យសម្តី), និងសិល្បៈខ្សែភាពយន្តវីដេអូ(រូបភាព)។",
+            q36: "<strong>ចម្លើយពេញ៖</strong> ស្ពានអ្នកលឿងមានប្រវែង ២២១៥ម៉ែត្រ។",
+            q37: "<strong>ចម្លើយពេញ៖</strong> ស្ពានជ្រោយចង្វាត្រូវបានខ្មែរក្រហមបំផ្លាញនៅថ្ងៃទី២៧ ខែមីនា ឆ្នាំ១៩៧២។", // កែពី ១៩check -> ១៩៧២
+            q38: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទព្រះវិហារចូលជាសម្បត្តិបេតិកភណ្ឌពិភពលោកនៅថ្ងៃទី៧ ខែកក្កដា ឆ្នាំ២០០៨។",
+            q39: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទកោះកេរស្ថិតនៅភូមិស្រយ៉ង់ជើង ឃុំស្រយ៉ង់ ស្រុកគូលែន ខេត្តព្រះវិហារ ប្រទេសកម្ពុជា។",
+            q40: "<strong>ចម្លើយពេញ៖</strong> អង្គការសហប្រជាជាតិអនុម័តអនុសញ្ញាអន្តរជាតិស្ដីពីសិទ្ធិកុមារនៅថ្ងៃទី ២០ វិច្ឆិកា ឆ្នាំ ១៩៨៩។",
+            q41: "<strong>ចម្លើយពេញ៖</strong> អនុក្រឹតស្ដីអំពីក្រមសីលធម៌វិជ្ជាជីវៈគ្រូបង្រៀនត្រូវបានចុះហត្ថលេខាដាក់ឱ្យប្រើប្រាស់នៅថ្ងៃទី០៩ ខែកញ្ញា ឆ្នាំ២០០៨។",
+            q42: "<strong>ចម្លើយពេញ៖</strong> ក្រមសីលធម៌វិជ្ជាជីវៈគ្រូបង្រៀនត្រូវបានបង្កើតឡើងដើម្បីកំណត់ក្រមសីលធម៌វិជ្ជាជីវៈសម្រាប់គ្រូបង្រៀននៅក្នុងព្រះរាជាណាចក្រកម្ពុជា។",
+            q43: "<strong>ចម្លើយពេញ៖</strong> សម្តេចព្រះសង្ឃរាជ ជួន ណាត ប្រសូត្រនៅថ្ងៃទី១១ ខែមីនា ឆ្នាំ១៨៨៣ នៅភូមិកំរៀង សង្កាត់រកាកោះ ស្រុកគងពិសី ខេត្តកំពង់ស្ពឺ ហើយព្រះអង្គសុគតនៅថ្ងៃទី២៥ ខែកញ្ញា ឆ្នាំ១៩៦៩ ក្នុងព្រះជន្មាយុ៨៦ព្រះវស្សា។",
+            q44: "<strong>ចម្លើយពេញ៖</strong> វិមានឈ្នះឈ្នះស្ថិតនៅសង្កាត់ព្រែកតាសេក ខណ្ឌជ្រោយចង្វារ បែកខាងជើងរាជធានីភ្នំពេញ។",
+            q45: "<strong>ចម្លើយពេញ៖</strong> មហេសីទី១របស់ព្រះបាទជ័យវរ័ន្មទី៧ព្រះនាម ជ័យរាជទេវី។",
+            q46: "<strong>ចម្លើយពេញ៖</strong> ភ្នំសន្ទុកស្ថិតនៅក្នុងភូមិកកោះ ឃុំកកោះ ស្រុកសន្ទុក ខេត្តកំពង់ធំ និងមានចំងាយ ១៧គ.ម. ពីទីរួមខេត្តកំពង់ធំ។",
+            q47: "<strong>ចម្លើយពេញ៖</strong> ព្រះពុទ្ធសាសនារុងរឿងនៅប្រទេសឥណ្ឌា ក្នុងរជ្ជកាលស្ដេចព្រះបាទអសោក។",
+            q48: "<strong>ចម្លើយពេញ៖</strong> ព្រះពុទ្ធសាសនាចូលមកក្នុងប្រទេសកម្ពុជាតាមរយៈអាណានិគមន៍(អ្នកមានឥទ្ធិពល) ឈ្មួញរកស៊ី និងតាមអ្នកផ្សព្វផ្សាយសាសនា។",
+            q49: "<strong>ចម្លើយពេញ៖</strong> សម្ដេចបវរធិបតី ហ៊ុន ម៉ាណែត ឡើងកាន់ដំណែងជានាយករដ្ឋមន្ត្រីនៅថ្ងៃទី២២ ខែសីហា ឆ្នាំ២០២៣។",
+            q50: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទព្រះវិហារកសាងឡើងដោយព្រះបាទយសោវរ្ម័នទី១ ព្រះបាទសូរ្យវរ្ម័នទី១ និងព្រះបាទសូរ្យវរ្ម័នទី២។",
+            q51: "<strong>ចម្លើយពេញ៖</strong> ជំរឿនឆ្នាំ២០០៨ប្រព្រឹត្តិទៅនៅថ្ងៃទី៣-១៣ ខែមីនា។",
+            q52: "<strong>ចម្លើយពេញ៖</strong> ទិវាគ្រូបង្រៀនបង្កើតដោយសម្ដេចតេជោ ហ៊ុន សែន។",
+            q53: "<strong>ចម្លើយពេញ៖</strong> បទមើលផែនដីខ្មែរនិពន្ធដោយលោក ជួន ម៉េន។",
+            q54: "<strong>ចម្លើយពេញ៖</strong> បទនគររាជនិពន្ធនៅថ្ងៃទី ២០ ខែកក្កដា ឆ្នាំ១៩៤១។",
+            q55: "<strong>ចម្លើយពេញ៖</strong> រចនាបថភ្នំដា, សម្បូរព្រៃគុក, ព្រៃក្មេង, កំពង់ព្រះ, គូលែន, ព្រះគោ, បាខែង, កោះកេរ, បន្ទាយស្រី, ឃ្លាំង, បាពួន, អង្គរវត្ត និងបាយ័ន។",
+            q56: "<strong>ចម្លើយពេញ៖</strong> របបកុម្មុយនីស្តគាំទ្រដោយវណ្ណៈកម្មករ ឬកសិករ។",
+            q57: "<strong>ចម្លើយពេញ៖</strong> ភ្លេងខ្មែរមាន៨វង់ គឺ៖ ភ្លេងពិណពាទ្យ, ភ្លេងខ្មែរ, ភ្លេងគងស្គរ, ភ្លេងអារក្ស, ភ្លេងឆៃយ៉ាំ, ភ្លេងខ្លងខែក, ភ្លេងស្គរយោល និងភ្លេងប៉ីកែង។",
+            q58: "<strong>ចម្លើយពេញ៖</strong> ជនជាតិដែលស្ថិតក្នុងអំបូរខ្មែរមនដែរគឺជាជនជាតិគ្រឹង។",
+            q59: "<strong>ចម្លើយពេញ៖</strong> សមាជិកព្រឹទ្ធសភាតែងតាំងដោយព្រះមហាក្សត្រ (សម្រាប់សមាជិក២រូប)។",
+            q60: "<strong>ចម្លើយពេញ៖</strong> ជាតិមួយមានការលេចធ្លោខុសពីជាតិសាសន៍ដ៏ទៃហៅថា លក្ខណៈជាតិ។",
+            q61: "<strong>ចម្លើយពេញ៖</strong> សាសនាព្រាហ្មណ៍មាន៣គណៈគឺ៖ គណៈព្រះសិវៈ ឬព្រះឥសូរ (អាទិទេពបង្កើត គ្រប់គ្រង និងបំផ្លាញលោក មានសាសនិកច្រើនជាងគេ), គណៈព្រះវិស្ណុ ឬព្រះនរាយណ៍ (អាទិទេពគ្រប់គ្រង និងថែរក្សាលោក មានសាសនិកមធ្យម) និងគណៈព្រះព្រហ្ម (អាទិទេពបង្កើតលោក មិនសូវមានការពេញនិយម និងមិនសូវមានតួនាទីសំខាន់ឡើយ)។",
+            q62: "<strong>ចម្លើយពេញ៖</strong> ចម្លាក់ខ្មែរមាន៣ប្រភេទ គឺ៖ លៀន លិប និងលោត។",
+            q63: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទក្នុងរជ្ជកាលរបស់ព្រះបាទជ័យវរ្ម័នទី៧ មានព្រហ្មមុខបួនតំណាងឲ្យ ព្រហ្មវិហារធម៌ទាំងបួន គឺ៖ មេត្តា ករុណា មុទិតា និងឧបេក្ខា។",
+            q64: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទអង្គរកសាងឧទ្ទិសដល់ព្រះវិស្ណុ ឬព្រះនរាយណ៍។",
+            q65: "<strong>ចម្លើយពេញ៖</strong> ព្រែកជីកហ្វូណនតេជោឆ្លងកាត់ខេត្តចំនួន ៤ រួមមាន ខេត្តកណ្តាល ខេត្តតាកែវ ខេត្តកំពត និងខេត្តកែប។",
+            q66: "<strong>ចម្លើយពេញ៖</strong> ប្រទេសកម្ពុជាបានចូលជាសមាជិកអង្គការសហប្រជាជាតិនៅឆ្នាំ១៩៥៥។",
+            q67: "<strong>ចម្លើយពេញ៖</strong> សម័យអាណានិគមនិយមបារាំងចាប់ផ្តើមនៅឆ្នាំ១៨៦៣ (កិច្ចព្រមព្រៀងគាំពារ) ឬឆ្នាំ១៨៨៤ (សន្ធិសញ្ញាដាក់ជាអាណានិគម)។",
+            q68: "<strong>ចម្លើយពេញ៖</strong> សម័យអាណានិគមនិយមបារាំងគ្រប់គ្រងដំបូងដោយ ព្រះបាទនរោត្តម (១៨៦០ ដល់១៩០៤)។",
+            q69: "<strong>ចម្លើយពេញ៖</strong> ប្រទេសកម្ពុជាទទួលបានឯករាជ្យនៅឆ្នាំ១៩៥៣",
+            q70: "<strong>ចម្លើយពេញ៖</strong> សម័យសង្គមរាស្ត្រនិយម (កម្ពុជាទីមួយ) ត្រូវបានបញ្ចប់នៅឆ្នាំ១៩៧០។",
+            q71: "<strong>ចម្លើយពេញ៖</strong> សម័យអាណាព្យាបាលបារាំងស្ដេចខ្មែរដែលទៅពឹងបារាំងឲ្យធ្វើជាខ្នងបង្អែក គឺ ព្រះបាទអង្គឌួង។",
+            q72: "<strong>ចម្លើយពេញ៖</strong> កត្តាដែលបណ្ដាលឱ្យមានគ្រោះថ្នាក់ចរាចរណ៍រួមមាន៖ កត្តាមនុស្ស (មិនគោរពច្បាប់ ស្រវឹង លឿន គ្មានការអធ្យាស្រ័យ), កត្តាយានយន្ត (ចាស់ទ្រុឌទ្រោម ខុសបច្ចេកទេស), កត្តាផ្លូវថ្នល់ (ខូចខាត កោង ចោទ គ្មានភ្លើងបំភ្លឺ) និងកត្តាអាកាសធាតុ (ភ្លៀង ខ្យល់កន្ត្រាក់ អ័ព្ទខ្លាំង)។",
+            q73: "<strong>ចម្លើយពេញ៖</strong> ដើម្បីកាត់បន្ថយកម្តៅនៅលើផែនដី៖ ដាំដើមឈើឲ្យបានច្រើន ការពារព្រៃឈើ កាត់បន្ថយការប្រើប្រាស់ ឥន្ធនៈផូស៊ីល គ្រប់គ្រងសំណល់ឧស្ម័នកាបូនិច និងប្រើប្រាស់វត្ថុដែលមិនបង្កគ្រោះថ្នាក់ចំពោះបរិស្ថាន។",
+            q74: "<strong>ចម្លើយពេញ៖</strong> ប្រទេសកម្ពុជាបានចូលជាសមាជិកអាស៊ាននៅថ្ងៃទី៣០ ខែមេសា ឆ្នាំ១៩៩៩។",
+            q75: "<strong>ចម្លើយពេញ៖</strong> ឥស្សរជនឆ្នើមខ្មែរដែលបញ្ចប់សង្គ្រាមស៊ីវិលនៅកម្ពុជា គឺ សម្ដេចតេជោ ហ៊ុន សែន ក្រោមជ័យជម្នះនៃនយោបាយឈ្នះ-ឈ្នះ ថ្ងៃទី២៩ ធ្នូ ឆ្នាំ១៩៩៨។",
+            q76: "<strong>ចម្លើយពេញ៖</strong> ច្បាប់ប្រឆាំងអំពើពុករលួយត្រូវប្រកាសឲ្យប្រើប្រាស់នៅឆ្នាំ២០១០។",
+            q77: "<strong>ចម្លើយពេញ៖</strong> អ្នកផ្តួចផ្តើមគំនិតបង្កើតទិវាជាតិអំណានឡើង គឺ សម្តេច តេជោ ហ៊ុន សែន។",
+            q78: "<strong>ចម្លើយពេញ៖</strong> ទិវាជាតិអំណានត្រូវប្រារព្ធឡើងនៅថ្ងៃទី១១ មីនា ២០១៥។",
+            q79: "<strong>ចម្លើយពេញ៖</strong> ប្រាសាទអង្គរចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃ១៤ ធ្នូ ឆ្នាំ១៩៩២។",
+            q80: "<strong>ចម្លើយពេញ៖</strong> កម្ពុជាបានប្រកាសរដ្ឋធម្មនុញ្ញនៅថ្ងៃ២៤ ខែកញ្ញា ឆ្នាំ១៩៩៣។",
+            q81: "<strong>ចម្លើយពេញ៖</strong> ស្ថាបនិកទាំង ៥ របស់អាស៊ានមានប្រទេស ឥណ្ឌូណេស៊ី ម៉ាឡេស៊ី ហ្វីលីពិន សិង្ហបុរី និងថៃ។",
+            q82: "<strong>ចម្លើយពេញ៖</strong> កម្ពុជាអនុវត្តនយោបាយអព្យាក្រឹត្យនៅឆ្នាំ១៩៥៥ (សន្និសីទបានឌុង)។",
+            q83: "<strong>ចម្លើយពេញ៖</strong> សម្តេចនរោត្តមសីហនុ ឡើងសោយរាជ្យលើកទី២ នៅថ្ងៃ២៤ ខែកញ្ញា ឆ្នាំ១៩៩៣។",
+            q84: "<strong>ចម្លើយពេញ៖</strong> សន្តិភាពពេញលេញនៅកម្ពុជាចាប់ផ្ដើមនៅថ្ងៃ២៩ ខែធ្នូ ឆ្នាំ១៩៩៨។",
+            q85: "<strong>ចម្លើយពេញ៖</strong> ព្រះបាទអង្គឌួងសោយរាជ្យពីឆ្នាំ១៨៤១ ដល់ឆ្នាំ១៨៦០។",
+            q86: "<strong>ចម្លើយពេញ៖</strong> ស្ដេចខ្មែរសោយរាជ្យសម័យអាណាព្យាបាលបារាំងមាន ព្រះបាទនរោត្តម (1863-1904), ព្រះបាទស៊ីសុវត្ថិ (1904-1927), ព្រះបាទស៊ីសុវត្ថិ មុនីវង្ស (1927-1941) និងព្រះបាទនរោត្តម សីហនុ សោយរាជ្យលើកទី១ (1941-1955)។", // កែពី ១constants៤ -> 1904, 19NT៥ -> 1955
+            q87: "<strong>ចម្លើយពេញ៖</strong> កម្ពុជាចូលជាសមាជិកអង្គការពាណិជ្ជកម្មពិភពលោកនៅថ្ងៃទី១៣ ខែតុលា ឆ្នាំ២០០៤។",
+            q88: "<strong>ចម្លើយពេញ៖</strong> ខ្មែរក្រហមវាយចូលទីក្រុងភ្នំពេញនៅថ្ងៃ១៧ ខែមេសា ឆ្នាំ១៩៧៥។",
+            q89: "<strong>ចម្លើយពេញ៖</strong> កម្ពុជារួចផុតពីសម័យខ្មែរក្រហមនៅថ្ងៃទី០៧ ខែមករា ឆ្នាំ១៩៧៩។", // កែពី ១៩check៩ -> ១៩៧៩
+            q90: "<strong>ចម្លើយពេញ៖</strong> រដ្ឋប្រហារទម្លាក់សម្ដេចនរោត្តមសីហនុធ្វើឡើងនៅថ្ងៃ១៨ ខែមីនា ឆ្នាំ១៩៧០។",
+            q91: "<strong>ចម្លើយពេញ៖</strong> មេដឹកនាំធ្វើរដ្ឋប្រហារទម្លាក់សម្ដេចនរោត្តមសីហនុ គឺ លោកសេនាប្រមុខ លន់ នល់ និងអ្នកអង្គម្ចាស់ស៊ីសុវត្ថិ សិរិមតៈ។",
+            q92: "<strong>ចម្លើយពេញ៖</strong> ដើមដែលយើងដាំដើម្បីការពារខ្យល់ គឺ ដើមឫស្សី។",
+            q93: "<strong>ចម្លើយពេញ៖</strong> នៅក្នុងសម័យសង្គមរាស្ត្រនិយមប្រកាន់យករបបនយោបាយអព្យាក្រឹត្យ។",
+            q94: "<strong>ចម្លើយពេញ៖</strong> អាស៊ានបង្កើតនៅថ្ងៃ០៨ ខែសីហា ឆ្នាំ១៩៦៧។",
+            q95: "<strong>ចម្លើយពេញ៖</strong> សម័យកម្ពុជាទីពីរត្រូវបានចាប់ផ្តើមនៅឆ្នាំ១៩៩៣។",
+            q96: "<strong>ចម្លើយពេញ៖</strong> ករណីជនល្មើសបុកជនរងគ្រោះបណ្តាលឱ្យស្លាប់បាត់បង់ជីវិតហើយរត់គេចខ្លួន គឺវាជាទោសលើផ្នែកព្រហ្មទណ្ឌ។",
+            q97: "<strong>ចម្លើយពេញ៖</strong> នយោបាយរបស់សម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត ផ្តោតសំខាន់លើ ការពង្រឹងមូលដ្ឋានសម្រាប់ការអភិវឌ្ឍជាតិ។",
+            q98: "<strong>ចម្លើយពេញ៖</strong> នាយករដ្ឋមន្ត្រីនៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ គឺ លោក ប៉ុល ពត។",
+            q99: "<strong>ចម្លើយពេញ៖</strong> អ្នកបង្កើតព្រះពុទ្ធសាសនា គឺ ព្រះពុទ្ធសាមណៈគោតម។",
+            q100: "<strong>ចម្លើយពេញ៖</strong> វិមានឈ្នះឈ្នះ សាងសង់នៅសង្កាត់ព្រែកតាសេក ខណ្ឌជ្រោយចង្វារ រាជធានីភ្នំពេញ។",
+            q101: "<strong>ចម្លើយពេញ៖</strong> ការកើតមានសេចក្តីលោភៈ ទោសៈ មោហៈ និងនាំទៅរកសេចក្តីទុក្ខ សេចក្ដីវិនាស។ នេះជាទ្រឹស្តីរបស់ព្រះពុទ្ធ។",
+            q102: "<strong>ចម្លើយពេញ៖</strong> អាកប្បកិរិយារបស់បុគ្គលម្នាក់ ដែលមិនទទួលឥទ្ធិពល ឬបទបញ្ជាពីអ្នកណាម្នាក់ ហើយមានសិទ្ធិសេរីភាពក្នុងការសម្រេចធ្វើអ្វីមួយ គេហៅថាមនុស្សមានឯករាជ្យភាព។",
+            q103: "<strong>ចម្លើយពេញ៖</strong> ការមានចិត្តស្រឡាញ់រាប់អានចង់ឱ្យគេបានសុខហៅថា មេត្តា។",
+            q104: "<strong>ចម្លើយពេញ៖</strong> ការមានចិត្តអាណិតអាសូរដោយគ្មានច្រណែនឈ្នានីសគឺ ករុណា។",
+            q105: "<strong>ចម្លើយពេញ៖</strong> ការអបអរសាទរចំពោះសេចក្តីសុខរបស់អ្នកដទៃហៅថា មុទិតា។",
+            q106: "<strong>ចម្លើយពេញ៖</strong> ការតាំងចិត្តជាកណ្តាលប្រកាន់ចិត្តអព្យាក្រឹត្យឥតលំអៀងហៅថា ឧបេក្ខា។",
+            q107: "<strong>ចម្លើយពេញ៖</strong> ការចេះដឹងគុណ និងទទួលស្គាល់គុណបំណាច់ដ៏ធំធេងរបស់បុព្វការីជនមានមាតាបិតាជាដើម ដែលបានធ្វើចំពោះបុត្រធីតាហៅថា កតញ្ញូតាធម៌។",
+            q108: "<strong>ចម្លើយពេញ៖</strong> ការបង្ហាញភាពស្មោះត្រង់គ្មានការលាក់លៀម ដោយហ៊ាននិយាយជាជំហរពីកំហុសរបស់ខ្លួនហៅថា តម្លាភាព។",
+            q109: "<strong>ចម្លើយពេញ៖</strong> ការបួសជាព្រះសង្ឃនៅក្នុងព្រះពុទ្ធសាសនាត្រូវសិក្សាតាម គម្ពីរព្រះត្រៃបិដក។",
+            q110: "<strong>ចម្លើយពេញ៖</strong> ប្រជាពលរដ្ឋទាំងពីរភេទមានអាយុ ២៥ ឆ្នាំឡើង មានសិទ្ធិឈរឈ្មោះឲ្យគេបោះឆ្នោតធ្វើតំណាងរាស្ត្រ។",
+            q111: "<strong>ចម្លើយពេញ៖</strong> នៅពេលមានប៉ូលីសត្រូវចាប់ខ្លួននរណាម្នាក់ អ្នកនោះត្រូវសុំមើលដីកា។"
+        };
+
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = "អស់ពេលកំណត់ហើយ!";
+                    timerElement.classList.add('danger');
+                    checkAnswers(false);
+                } else {
+                    timeLeft--;
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                    timerElement.innerHTML = `ពេលវេលានៅសល់៖ ${minutes}:${seconds}`;
+
+                    if (timeLeft <= 30) {
+                        timerElement.classList.add('danger');
+                    }
+                }
+            }, 1000);
+        }
+
+        function checkAnswers(isManualClick) {
+            if (isSubmitted) return;
+            isSubmitted = true;
+
+            clearInterval(timerInterval);
+
+            document.getElementById('submitBtn').disabled = true;
+            document.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+
+            const correctAnswers = {
+                q1: 'B', q2: 'B', q3: 'A', q4: 'B', q5: 'A',
+                q6: 'B', q7: 'B', q8: 'B', q9: 'B', q10: 'A',
+                q11: 'B', q12: 'A', q13: 'B', q14: 'A', q15: 'B',
+                q16: 'B', q17: 'C', q18: 'B', q19: 'A', q20: 'B',
+                q21: 'B', q22: 'A', q23: 'C', q24: 'A', q25: 'B',
+                q26: 'B', q27: 'B', q28: 'B', q29: 'B', q30: 'B',
+                q31: 'A', q32: 'B', q33: 'C', q34: 'A', q35: 'C',
+                q36: 'B', q37: 'A', q38: 'B', q39: 'B', q40: 'A',
+                q41: 'B', q42: 'A', q43: 'A', q44: 'B', q45: 'B',
+                q46: 'B', q47: 'A', q48: 'B', q49: 'A', q50: 'C',
+                q51: 'A', q52: 'B', q53: 'A', q54: 'A', q55: 'C',
+                q56: 'C', q57: 'B', q58: 'B', q59: 'C', q60: 'A',
+                q61: 'B', q62: 'A', q63: 'C', q64: 'B', q65: 'A',
+                q66: 'B', q67: 'A', q68: 'B', q69: 'B', q70: 'A',
+                q71: 'B', q72: 'A', q73: 'C', q74: 'B', q75: 'A',
+                q76: 'B', q77: 'A', q78: 'B', q79: 'A', q80: 'B',
+                q81: 'A', q82: 'B', q83: 'A', q84: 'B', q85: 'A',
+                q86: 'A', q87: 'A', q88: 'A', q89: 'C', q90: 'A',
+                q91: 'B', q92: 'A', q93: 'C', q94: 'A', q95: 'C',
+                q96: 'B', q97: 'A', q98: 'B', q99: 'C', q100: 'A',
+
+                q101: 'A', q102: 'B', q103: 'A', q104: 'B', q105: 'A', q106: 'C',
+                q107: 'A', q108: 'B', q109: 'A', q110: 'B', q111: 'C'
+            };
+
+            let score = 0;
+            let totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let key in correctAnswers) {
+                const correctAnswer = correctAnswers[key];
+                const selectedInput = document.querySelector(`input[name="${key}"]:checked`);
+                const allInputs = document.querySelectorAll(`input[name="${key}"]`);
+
+                allInputs.forEach(input => {
+                    if (input.value === correctAnswer) {
+                        input.parentElement.classList.add('correct');
+                    }
+                });
+
+                if (selectedInput) {
+                    if (selectedInput.value === correctAnswer) {
+                        score++;
+                    } else {
+                        selectedInput.parentElement.classList.add('incorrect');
+                    }
+                }
+
+                const expDiv = document.getElementById(`exp-${key}`);
+                if (expDiv && fullAnswersText[key]) {
+                    expDiv.innerHTML = fullAnswersText[key];
+                    expDiv.style.display = "block";
+                }
+            }
+
+            let percentage = Math.round((score / totalQuestions) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = "block";
+
+            let statusText = isManualClick ? "ការប្រឡងត្រូវបានបញ្ចប់ដោយជោគជ័យ!" : "អស់ពេលកំណត់ធ្វើកិច្ចការហើយ!";
+            resultDiv.innerHTML = `${statusText} <br> អ្នកទទួលបានពិន្ទុ៖ <strong>${score} / ${totalQuestions}</strong> សំណួរ (សមមូលនឹង <strong>${percentage}%</strong>)<br><small style="color:#666; font-size:1rem;">សូមអូសទៅមើលខាងលើវិញ ដើម្បីអានចម្លើយលម្អិតពេញលេញនៃសំណួរនីមួយៗ។</small>`;
+
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        startTimer();
+</script>
+</body>
+</html>
